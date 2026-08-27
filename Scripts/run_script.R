@@ -1,4 +1,4 @@
-file_path <- "C:/Users/z3443623/OneDrive - UNSW/Synergy/Scripts"
+file_path <- "C:/Projects/Synergy/Scripts"
 setwd(file_path)
 
 # First thing is to run the setup file

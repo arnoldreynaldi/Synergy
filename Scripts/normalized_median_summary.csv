@@ -1,0 +1,890 @@
+"Measurement_type","Cell_Type","Vaccine","Day","Median_fold_change"
+"A: Number of cell events","CD4","IC",8,1
+"A: Number of cell events","CD4","IC",14,1
+"A: Number of cell events","CD4","IC",28,1
+"A: Number of cell events","CD4","IC",60,1
+"A: Number of cell events","CD4","SOL",8,1
+"A: Number of cell events","CD4","SOL",14,1
+"A: Number of cell events","CD4","SOL",28,1
+"A: Number of cell events","CD4","SOL",60,1
+"A: Number of cell events","CD4","TM",8,1
+"A: Number of cell events","CD4","TM",14,1
+"A: Number of cell events","CD4","TM",28,1
+"A: Number of cell events","CD4","TM",60,1
+"A: Number of cell events","CD4","TMd21",8,1
+"A: Number of cell events","CD4","TMd21",14,1
+"A: Number of cell events","CD4","TMd21",28,1
+"A: Number of cell events","CD4","TMd21",60,1
+"B: Number of bead events","CD4","IC",8,1
+"B: Number of bead events","CD4","IC",14,1
+"B: Number of bead events","CD4","IC",28,1
+"B: Number of bead events","CD4","IC",60,1
+"B: Number of bead events","CD4","SOL",8,1
+"B: Number of bead events","CD4","SOL",14,1
+"B: Number of bead events","CD4","SOL",28,1
+"B: Number of bead events","CD4","SOL",60,1
+"B: Number of bead events","CD4","TM",8,1
+"B: Number of bead events","CD4","TM",14,1
+"B: Number of bead events","CD4","TM",28,1
+"B: Number of bead events","CD4","TM",60,1
+"B: Number of bead events","CD4","TMd21",8,1
+"B: Number of bead events","CD4","TMd21",14,1
+"B: Number of bead events","CD4","TMd21",28,1
+"B: Number of bead events","CD4","TMd21",60,1
+"CD127+ CD62L+ CX3CR1- KLRG1- TCM (% tetramer)","CD8","IC",8,1
+"CD127+ CD62L+ CX3CR1- KLRG1- TCM (% tetramer)","CD8","IC",14,1
+"CD127+ CD62L+ CX3CR1- KLRG1- TCM (% tetramer)","CD8","IC",28,1
+"CD127+ CD62L+ CX3CR1- KLRG1- TCM (% tetramer)","CD8","IC",60,1
+"CD127+ CD62L+ CX3CR1- KLRG1- TCM (% tetramer)","CD8","SOL",8,1
+"CD127+ CD62L+ CX3CR1- KLRG1- TCM (% tetramer)","CD8","SOL",14,1
+"CD127+ CD62L+ CX3CR1- KLRG1- TCM (% tetramer)","CD8","SOL",28,1
+"CD127+ CD62L+ CX3CR1- KLRG1- TCM (% tetramer)","CD8","SOL",60,1
+"CD127+ CD62L+ CX3CR1- KLRG1- TCM (% tetramer)","CD8","TM",8,1
+"CD127+ CD62L+ CX3CR1- KLRG1- TCM (% tetramer)","CD8","TM",14,1
+"CD127+ CD62L+ CX3CR1- KLRG1- TCM (% tetramer)","CD8","TM",28,1
+"CD127+ CD62L+ CX3CR1- KLRG1- TCM (% tetramer)","CD8","TM",60,1
+"CD127+ CD62L+ CX3CR1- KLRG1- TCM (% tetramer)","CD8","TMd21",8,1
+"CD127+ CD62L+ CX3CR1- KLRG1- TCM (% tetramer)","CD8","TMd21",14,1
+"CD127+ CD62L+ CX3CR1- KLRG1- TCM (% tetramer)","CD8","TMd21",28,1
+"CD127+ CD62L+ CX3CR1- KLRG1- TCM (% tetramer)","CD8","TMd21",60,1
+"CD127+ KLRG1- CD62L+ TCF1+ SLAMF6+ Tscm (% tetramer)","CD8","IC",8,1
+"CD127+ KLRG1- CD62L+ TCF1+ SLAMF6+ Tscm (% tetramer)","CD8","IC",14,1
+"CD127+ KLRG1- CD62L+ TCF1+ SLAMF6+ Tscm (% tetramer)","CD8","IC",28,1
+"CD127+ KLRG1- CD62L+ TCF1+ SLAMF6+ Tscm (% tetramer)","CD8","IC",60,1
+"CD127+ KLRG1- CD62L+ TCF1+ SLAMF6+ Tscm (% tetramer)","CD8","SOL",8,1
+"CD127+ KLRG1- CD62L+ TCF1+ SLAMF6+ Tscm (% tetramer)","CD8","SOL",14,1
+"CD127+ KLRG1- CD62L+ TCF1+ SLAMF6+ Tscm (% tetramer)","CD8","SOL",28,1
+"CD127+ KLRG1- CD62L+ TCF1+ SLAMF6+ Tscm (% tetramer)","CD8","SOL",60,1
+"CD127+ KLRG1- CD62L+ TCF1+ SLAMF6+ Tscm (% tetramer)","CD8","TM",8,1
+"CD127+ KLRG1- CD62L+ TCF1+ SLAMF6+ Tscm (% tetramer)","CD8","TM",14,1
+"CD127+ KLRG1- CD62L+ TCF1+ SLAMF6+ Tscm (% tetramer)","CD8","TM",28,1
+"CD127+ KLRG1- CD62L+ TCF1+ SLAMF6+ Tscm (% tetramer)","CD8","TM",60,1
+"CD127+ KLRG1- CD62L+ TCF1+ SLAMF6+ Tscm (% tetramer)","CD8","TMd21",8,1
+"CD127+ KLRG1- CD62L+ TCF1+ SLAMF6+ Tscm (% tetramer)","CD8","TMd21",14,1
+"CD127+ KLRG1- CD62L+ TCF1+ SLAMF6+ Tscm (% tetramer)","CD8","TMd21",28,1
+"CD127+ KLRG1- CD62L+ TCF1+ SLAMF6+ Tscm (% tetramer)","CD8","TMd21",60,1
+"CD127+ KLRG1- CD62L+ TCF1+ SLAMF6+ Tscm (%TCM)","CD8","IC",8,1
+"CD127+ KLRG1- CD62L+ TCF1+ SLAMF6+ Tscm (%TCM)","CD8","IC",14,1
+"CD127+ KLRG1- CD62L+ TCF1+ SLAMF6+ Tscm (%TCM)","CD8","IC",28,1
+"CD127+ KLRG1- CD62L+ TCF1+ SLAMF6+ Tscm (%TCM)","CD8","IC",60,1
+"CD127+ KLRG1- CD62L+ TCF1+ SLAMF6+ Tscm (%TCM)","CD8","SOL",8,1
+"CD127+ KLRG1- CD62L+ TCF1+ SLAMF6+ Tscm (%TCM)","CD8","SOL",14,1
+"CD127+ KLRG1- CD62L+ TCF1+ SLAMF6+ Tscm (%TCM)","CD8","SOL",28,1
+"CD127+ KLRG1- CD62L+ TCF1+ SLAMF6+ Tscm (%TCM)","CD8","SOL",60,1
+"CD127+ KLRG1- CD62L+ TCF1+ SLAMF6+ Tscm (%TCM)","CD8","TM",8,1
+"CD127+ KLRG1- CD62L+ TCF1+ SLAMF6+ Tscm (%TCM)","CD8","TM",14,1
+"CD127+ KLRG1- CD62L+ TCF1+ SLAMF6+ Tscm (%TCM)","CD8","TM",28,1
+"CD127+ KLRG1- CD62L+ TCF1+ SLAMF6+ Tscm (%TCM)","CD8","TM",60,1
+"CD127+ KLRG1- CD62L+ TCF1+ SLAMF6+ Tscm (%TCM)","CD8","TMd21",8,1
+"CD127+ KLRG1- CD62L+ TCF1+ SLAMF6+ Tscm (%TCM)","CD8","TMd21",14,1
+"CD127+ KLRG1- CD62L+ TCF1+ SLAMF6+ Tscm (%TCM)","CD8","TMd21",28,1
+"CD127+ KLRG1- CD62L+ TCF1+ SLAMF6+ Tscm (%TCM)","CD8","TMd21",60,1
+"CD127+ KLRG1- TCF1+ SLAMF6+ Tscm (% tetramer)","CD8","IC",60,1
+"CD127+ KLRG1- TCF1+ SLAMF6+ Tscm (% tetramer)","CD8","SOL",60,1
+"CD127+ KLRG1- TCF1+ SLAMF6+ Tscm (% tetramer)","CD8","TM",60,1
+"CD127+ KLRG1- TCF1+ SLAMF6+ Tscm (% tetramer)","CD8","TMd21",60,1
+"CD127+ KLRG1- TCF1+ SLAMF6+ Tsl (% tetramer)","CD8","IC",8,1
+"CD127+ KLRG1- TCF1+ SLAMF6+ Tsl (% tetramer)","CD8","IC",28,1
+"CD127+ KLRG1- TCF1+ SLAMF6+ Tsl (% tetramer)","CD8","SOL",8,1
+"CD127+ KLRG1- TCF1+ SLAMF6+ Tsl (% tetramer)","CD8","SOL",28,1
+"CD127+ KLRG1- TCF1+ SLAMF6+ Tsl (% tetramer)","CD8","TM",8,1
+"CD127+ KLRG1- TCF1+ SLAMF6+ Tsl (% tetramer)","CD8","TM",28,1
+"CD127+ KLRG1- TCF1+ SLAMF6+ Tsl (% tetramer)","CD8","TMd21",8,1
+"CD127+ KLRG1- TCF1+ SLAMF6+ Tsl (% tetramer)","CD8","TMd21",28,1
+"CD127+ KLRG1- memory (% tetramer)","CD8","IC",8,1
+"CD127+ KLRG1- memory (% tetramer)","CD8","IC",14,1
+"CD127+ KLRG1- memory (% tetramer)","CD8","IC",28,1
+"CD127+ KLRG1- memory (% tetramer)","CD8","IC",60,1
+"CD127+ KLRG1- memory (% tetramer)","CD8","SOL",8,1
+"CD127+ KLRG1- memory (% tetramer)","CD8","SOL",14,1
+"CD127+ KLRG1- memory (% tetramer)","CD8","SOL",28,1
+"CD127+ KLRG1- memory (% tetramer)","CD8","SOL",60,1
+"CD127+ KLRG1- memory (% tetramer)","CD8","TM",8,1
+"CD127+ KLRG1- memory (% tetramer)","CD8","TM",14,1
+"CD127+ KLRG1- memory (% tetramer)","CD8","TM",28,1
+"CD127+ KLRG1- memory (% tetramer)","CD8","TM",60,1
+"CD127+ KLRG1- memory (% tetramer)","CD8","TMd21",8,1
+"CD127+ KLRG1- memory (% tetramer)","CD8","TMd21",14,1
+"CD127+ KLRG1- memory (% tetramer)","CD8","TMd21",28,1
+"CD127+ KLRG1- memory (% tetramer)","CD8","TMd21",60,1
+"CD127+ PD-1+ CXCR5+ KLRG1- TFH like (% tetramer)","CD8","IC",8,1
+"CD127+ PD-1+ CXCR5+ KLRG1- TFH like (% tetramer)","CD8","IC",60,1
+"CD127+ PD-1+ CXCR5+ KLRG1- TFH like (% tetramer)","CD8","SOL",8,1
+"CD127+ PD-1+ CXCR5+ KLRG1- TFH like (% tetramer)","CD8","SOL",60,1
+"CD127+ PD-1+ CXCR5+ KLRG1- TFH like (% tetramer)","CD8","TM",8,1
+"CD127+ PD-1+ CXCR5+ KLRG1- TFH like (% tetramer)","CD8","TM",60,1
+"CD127+ PD-1+ CXCR5+ KLRG1- TFH like (% tetramer)","CD8","TMd21",8,1
+"CD127+ PD-1+ CXCR5+ KLRG1- TFH like (% tetramer)","CD8","TMd21",60,1
+"CD127+ PD-1+ CXCR5+ Tfh like (% tetramer)","CD8","IC",14,1
+"CD127+ PD-1+ CXCR5+ Tfh like (% tetramer)","CD8","SOL",14,1
+"CD127+ PD-1+ CXCR5+ Tfh like (% tetramer)","CD8","TM",14,1
+"CD127+ PD-1+ CXCR5+ Tfh like (% tetramer)","CD8","TMd21",14,1
+"CD127+ TCF1+ SLAMF6+ CD62L+ Tscm (% tetramer)","CD8","IC",8,1
+"CD127+ TCF1+ SLAMF6+ CD62L+ Tscm (% tetramer)","CD8","SOL",8,1
+"CD127+ TCF1+ SLAMF6+ CD62L+ Tscm (% tetramer)","CD8","TM",8,1
+"CD127+ TCF1+ SLAMF6+ CD62L+ Tscm (% tetramer)","CD8","TMd21",8,1
+"CD4 T cells (% live lymphocytes)","CD4","IC",8,1
+"CD4 T cells (% live lymphocytes)","CD4","IC",14,1
+"CD4 T cells (% live lymphocytes)","CD4","IC",28,1
+"CD4 T cells (% live lymphocytes)","CD4","IC",60,1
+"CD4 T cells (% live lymphocytes)","CD4","SOL",8,1
+"CD4 T cells (% live lymphocytes)","CD4","SOL",14,1
+"CD4 T cells (% live lymphocytes)","CD4","SOL",28,1
+"CD4 T cells (% live lymphocytes)","CD4","SOL",60,1
+"CD4 T cells (% live lymphocytes)","CD4","TM",8,1
+"CD4 T cells (% live lymphocytes)","CD4","TM",14,1
+"CD4 T cells (% live lymphocytes)","CD4","TM",28,1
+"CD4 T cells (% live lymphocytes)","CD4","TM",60,1
+"CD4 T cells (% live lymphocytes)","CD4","TMd21",8,1
+"CD4 T cells (% live lymphocytes)","CD4","TMd21",14,1
+"CD4 T cells (% live lymphocytes)","CD4","TMd21",28,1
+"CD4 T cells (% live lymphocytes)","CD4","TMd21",60,1
+"CD44+ CD62L+ TCM (% tetramer)","CD4","IC",8,1
+"CD44+ CD62L+ TCM (% tetramer)","CD4","IC",14,1
+"CD44+ CD62L+ TCM (% tetramer)","CD4","IC",28,1
+"CD44+ CD62L+ TCM (% tetramer)","CD4","IC",60,1
+"CD44+ CD62L+ TCM (% tetramer)","CD4","SOL",8,1
+"CD44+ CD62L+ TCM (% tetramer)","CD4","SOL",14,1
+"CD44+ CD62L+ TCM (% tetramer)","CD4","SOL",28,1
+"CD44+ CD62L+ TCM (% tetramer)","CD4","SOL",60,1
+"CD44+ CD62L+ TCM (% tetramer)","CD4","TM",8,1
+"CD44+ CD62L+ TCM (% tetramer)","CD4","TM",14,1
+"CD44+ CD62L+ TCM (% tetramer)","CD4","TM",28,1
+"CD44+ CD62L+ TCM (% tetramer)","CD4","TM",60,1
+"CD44+ CD62L+ TCM (% tetramer)","CD4","TMd21",8,1
+"CD44+ CD62L+ TCM (% tetramer)","CD4","TMd21",14,1
+"CD44+ CD62L+ TCM (% tetramer)","CD4","TMd21",28,1
+"CD44+ CD62L+ TCM (% tetramer)","CD4","TMd21",60,1
+"CD44+ CD62L- TEM (% tetramer)","CD4","IC",8,1
+"CD44+ CD62L- TEM (% tetramer)","CD4","IC",14,1
+"CD44+ CD62L- TEM (% tetramer)","CD4","IC",28,1
+"CD44+ CD62L- TEM (% tetramer)","CD4","IC",60,1
+"CD44+ CD62L- TEM (% tetramer)","CD4","SOL",8,1
+"CD44+ CD62L- TEM (% tetramer)","CD4","SOL",14,1
+"CD44+ CD62L- TEM (% tetramer)","CD4","SOL",28,1
+"CD44+ CD62L- TEM (% tetramer)","CD4","SOL",60,1
+"CD44+ CD62L- TEM (% tetramer)","CD4","TM",8,1
+"CD44+ CD62L- TEM (% tetramer)","CD4","TM",14,1
+"CD44+ CD62L- TEM (% tetramer)","CD4","TM",28,1
+"CD44+ CD62L- TEM (% tetramer)","CD4","TM",60,1
+"CD44+ CD62L- TEM (% tetramer)","CD4","TMd21",8,1
+"CD44+ CD62L- TEM (% tetramer)","CD4","TMd21",14,1
+"CD44+ CD62L- TEM (% tetramer)","CD4","TMd21",28,1
+"CD44+ CD62L- TEM (% tetramer)","CD4","TMd21",60,1
+"CD62L+ CX3CR1 TCM ( % of tetramer)","CD8","IC",14,1
+"CD62L+ CX3CR1 TCM ( % of tetramer)","CD8","SOL",14,1
+"CD62L+ CX3CR1 TCM ( % of tetramer)","CD8","TM",14,1
+"CD62L+ CX3CR1 TCM ( % of tetramer)","CD8","TMd21",14,1
+"CD62L+ CX3CR1- TCM (% memory)","CD8","IC",8,1
+"CD62L+ CX3CR1- TCM (% memory)","CD8","IC",14,1
+"CD62L+ CX3CR1- TCM (% memory)","CD8","IC",28,1
+"CD62L+ CX3CR1- TCM (% memory)","CD8","IC",60,1
+"CD62L+ CX3CR1- TCM (% memory)","CD8","SOL",8,1
+"CD62L+ CX3CR1- TCM (% memory)","CD8","SOL",14,1
+"CD62L+ CX3CR1- TCM (% memory)","CD8","SOL",28,1
+"CD62L+ CX3CR1- TCM (% memory)","CD8","SOL",60,1
+"CD62L+ CX3CR1- TCM (% memory)","CD8","TM",8,1
+"CD62L+ CX3CR1- TCM (% memory)","CD8","TM",14,1
+"CD62L+ CX3CR1- TCM (% memory)","CD8","TM",28,1
+"CD62L+ CX3CR1- TCM (% memory)","CD8","TM",60,1
+"CD62L+ CX3CR1- TCM (% memory)","CD8","TMd21",8,1
+"CD62L+ CX3CR1- TCM (% memory)","CD8","TMd21",14,1
+"CD62L+ CX3CR1- TCM (% memory)","CD8","TMd21",28,1
+"CD62L+ CX3CR1- TCM (% memory)","CD8","TMd21",60,1
+"CD62L+ CX3CR1- TCM (% of memory)","CD8","IC",14,1
+"CD62L+ CX3CR1- TCM (% of memory)","CD8","SOL",14,1
+"CD62L+ CX3CR1- TCM (% of memory)","CD8","TM",14,1
+"CD62L+ CX3CR1- TCM (% of memory)","CD8","TMd21",14,1
+"CD62L- CX3CR1hi TEM (% memory)","CD8","IC",8,1
+"CD62L- CX3CR1hi TEM (% memory)","CD8","IC",14,1
+"CD62L- CX3CR1hi TEM (% memory)","CD8","IC",28,1
+"CD62L- CX3CR1hi TEM (% memory)","CD8","IC",60,1
+"CD62L- CX3CR1hi TEM (% memory)","CD8","SOL",8,1
+"CD62L- CX3CR1hi TEM (% memory)","CD8","SOL",14,1
+"CD62L- CX3CR1hi TEM (% memory)","CD8","SOL",28,1
+"CD62L- CX3CR1hi TEM (% memory)","CD8","SOL",60,1
+"CD62L- CX3CR1hi TEM (% memory)","CD8","TM",8,1
+"CD62L- CX3CR1hi TEM (% memory)","CD8","TM",14,1
+"CD62L- CX3CR1hi TEM (% memory)","CD8","TM",28,1
+"CD62L- CX3CR1hi TEM (% memory)","CD8","TM",60,1
+"CD62L- CX3CR1hi TEM (% memory)","CD8","TMd21",8,1
+"CD62L- CX3CR1hi TEM (% memory)","CD8","TMd21",14,1
+"CD62L- CX3CR1hi TEM (% memory)","CD8","TMd21",28,1
+"CD62L- CX3CR1hi TEM (% memory)","CD8","TMd21",60,1
+"CD62L- CX3CR1hi TEM (% tetramer)","CD8","IC",8,1
+"CD62L- CX3CR1hi TEM (% tetramer)","CD8","IC",14,1
+"CD62L- CX3CR1hi TEM (% tetramer)","CD8","IC",28,1
+"CD62L- CX3CR1hi TEM (% tetramer)","CD8","IC",60,1
+"CD62L- CX3CR1hi TEM (% tetramer)","CD8","SOL",8,1
+"CD62L- CX3CR1hi TEM (% tetramer)","CD8","SOL",14,1
+"CD62L- CX3CR1hi TEM (% tetramer)","CD8","SOL",28,1
+"CD62L- CX3CR1hi TEM (% tetramer)","CD8","SOL",60,1
+"CD62L- CX3CR1hi TEM (% tetramer)","CD8","TM",8,1
+"CD62L- CX3CR1hi TEM (% tetramer)","CD8","TM",14,1
+"CD62L- CX3CR1hi TEM (% tetramer)","CD8","TM",28,1
+"CD62L- CX3CR1hi TEM (% tetramer)","CD8","TM",60,1
+"CD62L- CX3CR1hi TEM (% tetramer)","CD8","TMd21",8,1
+"CD62L- CX3CR1hi TEM (% tetramer)","CD8","TMd21",14,1
+"CD62L- CX3CR1hi TEM (% tetramer)","CD8","TMd21",28,1
+"CD62L- CX3CR1hi TEM (% tetramer)","CD8","TMd21",60,1
+"CD8 (% live lymphocytes)","CD8","IC",14,1
+"CD8 (% live lymphocytes)","CD8","SOL",14,1
+"CD8 (% live lymphocytes)","CD8","TM",14,1
+"CD8 (% live lymphocytes)","CD8","TMd21",14,1
+"CD8 T cells (% of live lymphocytes)","CD8","IC",8,1
+"CD8 T cells (% of live lymphocytes)","CD8","IC",14,1
+"CD8 T cells (% of live lymphocytes)","CD8","IC",28,1
+"CD8 T cells (% of live lymphocytes)","CD8","IC",60,1
+"CD8 T cells (% of live lymphocytes)","CD8","SOL",8,1
+"CD8 T cells (% of live lymphocytes)","CD8","SOL",14,1
+"CD8 T cells (% of live lymphocytes)","CD8","SOL",28,1
+"CD8 T cells (% of live lymphocytes)","CD8","SOL",60,1
+"CD8 T cells (% of live lymphocytes)","CD8","TM",8,1
+"CD8 T cells (% of live lymphocytes)","CD8","TM",14,1
+"CD8 T cells (% of live lymphocytes)","CD8","TM",28,1
+"CD8 T cells (% of live lymphocytes)","CD8","TM",60,1
+"CD8 T cells (% of live lymphocytes)","CD8","TMd21",8,1
+"CD8 T cells (% of live lymphocytes)","CD8","TMd21",14,1
+"CD8 T cells (% of live lymphocytes)","CD8","TMd21",28,1
+"CD8 T cells (% of live lymphocytes)","CD8","TMd21",60,1
+"CXCR3+ CCR6- Th1 (% Teff)","CD4","IC",8,1
+"CXCR3+ CCR6- Th1 (% Teff)","CD4","IC",14,1
+"CXCR3+ CCR6- Th1 (% Teff)","CD4","IC",28,1
+"CXCR3+ CCR6- Th1 (% Teff)","CD4","IC",60,1
+"CXCR3+ CCR6- Th1 (% Teff)","CD4","SOL",8,1
+"CXCR3+ CCR6- Th1 (% Teff)","CD4","SOL",14,1
+"CXCR3+ CCR6- Th1 (% Teff)","CD4","SOL",28,1
+"CXCR3+ CCR6- Th1 (% Teff)","CD4","SOL",60,1
+"CXCR3+ CCR6- Th1 (% Teff)","CD4","TM",8,1
+"CXCR3+ CCR6- Th1 (% Teff)","CD4","TM",14,1
+"CXCR3+ CCR6- Th1 (% Teff)","CD4","TM",28,1
+"CXCR3+ CCR6- Th1 (% Teff)","CD4","TM",60,1
+"CXCR3+ CCR6- Th1 (% Teff)","CD4","TMd21",8,1
+"CXCR3+ CCR6- Th1 (% Teff)","CD4","TMd21",14,1
+"CXCR3+ CCR6- Th1 (% Teff)","CD4","TMd21",28,1
+"CXCR3+ CCR6- Th1 (% Teff)","CD4","TMd21",60,1
+"CXCR3+ CCR6- Th1 (% tetramer)","CD4","IC",8,1
+"CXCR3+ CCR6- Th1 (% tetramer)","CD4","IC",14,1
+"CXCR3+ CCR6- Th1 (% tetramer)","CD4","IC",28,1
+"CXCR3+ CCR6- Th1 (% tetramer)","CD4","IC",60,1
+"CXCR3+ CCR6- Th1 (% tetramer)","CD4","SOL",8,1
+"CXCR3+ CCR6- Th1 (% tetramer)","CD4","SOL",14,1
+"CXCR3+ CCR6- Th1 (% tetramer)","CD4","SOL",28,1
+"CXCR3+ CCR6- Th1 (% tetramer)","CD4","SOL",60,1
+"CXCR3+ CCR6- Th1 (% tetramer)","CD4","TM",8,1
+"CXCR3+ CCR6- Th1 (% tetramer)","CD4","TM",14,1
+"CXCR3+ CCR6- Th1 (% tetramer)","CD4","TM",28,1
+"CXCR3+ CCR6- Th1 (% tetramer)","CD4","TM",60,1
+"CXCR3+ CCR6- Th1 (% tetramer)","CD4","TMd21",8,1
+"CXCR3+ CCR6- Th1 (% tetramer)","CD4","TMd21",14,1
+"CXCR3+ CCR6- Th1 (% tetramer)","CD4","TMd21",28,1
+"CXCR3+ CCR6- Th1 (% tetramer)","CD4","TMd21",60,1
+"CXCR3- CCR6+ Th17 (% Teff)","CD4","IC",8,1
+"CXCR3- CCR6+ Th17 (% Teff)","CD4","IC",14,0.666
+"CXCR3- CCR6+ Th17 (% Teff)","CD4","IC",28,0
+"CXCR3- CCR6+ Th17 (% Teff)","CD4","IC",60,0.5
+"CXCR3- CCR6+ Th17 (% Teff)","CD4","SOL",8,1
+"CXCR3- CCR6+ Th17 (% Teff)","CD4","SOL",14,1
+"CXCR3- CCR6+ Th17 (% Teff)","CD4","SOL",60,1
+"CXCR3- CCR6+ Th17 (% Teff)","CD4","TM",8,1
+"CXCR3- CCR6+ Th17 (% Teff)","CD4","TM",14,1
+"CXCR3- CCR6+ Th17 (% Teff)","CD4","TM",28,1
+"CXCR3- CCR6+ Th17 (% Teff)","CD4","TM",60,1
+"CXCR3- CCR6+ Th17 (% Teff)","CD4","TMd21",8,1
+"CXCR3- CCR6+ Th17 (% Teff)","CD4","TMd21",14,1
+"CXCR3- CCR6+ Th17 (% Teff)","CD4","TMd21",28,1
+"CXCR3- CCR6+ Th17 (% Teff)","CD4","TMd21",60,1
+"CXCR3- CCR6+ Th17 (% tetramer)","CD4","IC",8,1
+"CXCR3- CCR6+ Th17 (% tetramer)","CD4","IC",14,1.53308823529412
+"CXCR3- CCR6+ Th17 (% tetramer)","CD4","IC",28,0
+"CXCR3- CCR6+ Th17 (% tetramer)","CD4","IC",60,0.5
+"CXCR3- CCR6+ Th17 (% tetramer)","CD4","SOL",8,1
+"CXCR3- CCR6+ Th17 (% tetramer)","CD4","SOL",14,1
+"CXCR3- CCR6+ Th17 (% tetramer)","CD4","SOL",60,1
+"CXCR3- CCR6+ Th17 (% tetramer)","CD4","TM",8,1
+"CXCR3- CCR6+ Th17 (% tetramer)","CD4","TM",14,1
+"CXCR3- CCR6+ Th17 (% tetramer)","CD4","TM",28,1
+"CXCR3- CCR6+ Th17 (% tetramer)","CD4","TM",60,1
+"CXCR3- CCR6+ Th17 (% tetramer)","CD4","TMd21",8,1
+"CXCR3- CCR6+ Th17 (% tetramer)","CD4","TMd21",14,1
+"CXCR3- CCR6+ Th17 (% tetramer)","CD4","TMd21",28,1
+"CXCR3- CCR6+ Th17 (% tetramer)","CD4","TMd21",60,1
+"CXCR3- CCR6- Th2 (% Teff)","CD4","IC",8,1
+"CXCR3- CCR6- Th2 (% Teff)","CD4","IC",14,1
+"CXCR3- CCR6- Th2 (% Teff)","CD4","IC",28,1
+"CXCR3- CCR6- Th2 (% Teff)","CD4","IC",60,1
+"CXCR3- CCR6- Th2 (% Teff)","CD4","SOL",8,1
+"CXCR3- CCR6- Th2 (% Teff)","CD4","SOL",14,1
+"CXCR3- CCR6- Th2 (% Teff)","CD4","SOL",28,1
+"CXCR3- CCR6- Th2 (% Teff)","CD4","SOL",60,1
+"CXCR3- CCR6- Th2 (% Teff)","CD4","TM",8,1
+"CXCR3- CCR6- Th2 (% Teff)","CD4","TM",14,1
+"CXCR3- CCR6- Th2 (% Teff)","CD4","TM",28,1
+"CXCR3- CCR6- Th2 (% Teff)","CD4","TM",60,1
+"CXCR3- CCR6- Th2 (% Teff)","CD4","TMd21",8,1
+"CXCR3- CCR6- Th2 (% Teff)","CD4","TMd21",14,1
+"CXCR3- CCR6- Th2 (% Teff)","CD4","TMd21",28,1
+"CXCR3- CCR6- Th2 (% Teff)","CD4","TMd21",60,1
+"CXCR3- CCR6- Th2 (% tetramer)","CD4","IC",8,1
+"CXCR3- CCR6- Th2 (% tetramer)","CD4","IC",14,1
+"CXCR3- CCR6- Th2 (% tetramer)","CD4","IC",28,1
+"CXCR3- CCR6- Th2 (% tetramer)","CD4","IC",60,1
+"CXCR3- CCR6- Th2 (% tetramer)","CD4","SOL",8,1
+"CXCR3- CCR6- Th2 (% tetramer)","CD4","SOL",14,1
+"CXCR3- CCR6- Th2 (% tetramer)","CD4","SOL",28,1
+"CXCR3- CCR6- Th2 (% tetramer)","CD4","SOL",60,1
+"CXCR3- CCR6- Th2 (% tetramer)","CD4","TM",8,1
+"CXCR3- CCR6- Th2 (% tetramer)","CD4","TM",14,1
+"CXCR3- CCR6- Th2 (% tetramer)","CD4","TM",28,1
+"CXCR3- CCR6- Th2 (% tetramer)","CD4","TM",60,1
+"CXCR3- CCR6- Th2 (% tetramer)","CD4","TMd21",8,1
+"CXCR3- CCR6- Th2 (% tetramer)","CD4","TMd21",14,1
+"CXCR3- CCR6- Th2 (% tetramer)","CD4","TMd21",28,1
+"CXCR3- CCR6- Th2 (% tetramer)","CD4","TMd21",60,1
+"Cell/bead ratio","CD8","IC",8,1
+"Cell/bead ratio","CD8","IC",14,1
+"Cell/bead ratio","CD8","IC",28,1
+"Cell/bead ratio","CD8","IC",60,1
+"Cell/bead ratio","CD8","SOL",8,1
+"Cell/bead ratio","CD8","SOL",14,1
+"Cell/bead ratio","CD8","SOL",28,1
+"Cell/bead ratio","CD8","SOL",60,1
+"Cell/bead ratio","CD8","TM",8,1
+"Cell/bead ratio","CD8","TM",14,1
+"Cell/bead ratio","CD8","TM",28,1
+"Cell/bead ratio","CD8","TM",60,1
+"Cell/bead ratio","CD8","TMd21",8,1
+"Cell/bead ratio","CD8","TMd21",14,1
+"Cell/bead ratio","CD8","TMd21",28,1
+"Cell/bead ratio","CD8","TMd21",60,1
+"Cells in total sample vol","CD8","IC",8,1
+"Cells in total sample vol","CD8","IC",14,1
+"Cells in total sample vol","CD8","IC",28,1
+"Cells in total sample vol","CD8","IC",60,1
+"Cells in total sample vol","CD8","SOL",8,1
+"Cells in total sample vol","CD8","SOL",14,1
+"Cells in total sample vol","CD8","SOL",28,1
+"Cells in total sample vol","CD8","SOL",60,1
+"Cells in total sample vol","CD8","TM",8,1
+"Cells in total sample vol","CD8","TM",14,1
+"Cells in total sample vol","CD8","TM",28,1
+"Cells in total sample vol","CD8","TM",60,1
+"Cells in total sample vol","CD8","TMd21",8,1
+"Cells in total sample vol","CD8","TMd21",14,1
+"Cells in total sample vol","CD8","TMd21",28,1
+"Cells in total sample vol","CD8","TMd21",60,1
+"Cells/µL","CD4","IC",8,1
+"Cells/µL","CD4","IC",14,1
+"Cells/µL","CD4","IC",28,1
+"Cells/µL","CD4","IC",60,1
+"Cells/µL","CD4","SOL",8,1
+"Cells/µL","CD4","SOL",14,1
+"Cells/µL","CD4","SOL",28,1
+"Cells/µL","CD4","SOL",60,1
+"Cells/µL","CD4","TM",8,1
+"Cells/µL","CD4","TM",14,1
+"Cells/µL","CD4","TM",28,1
+"Cells/µL","CD4","TM",60,1
+"Cells/µL","CD4","TMd21",8,1
+"Cells/µL","CD4","TMd21",14,1
+"Cells/µL","CD4","TMd21",28,1
+"Cells/µL","CD4","TMd21",60,1
+"Cells/µL","CD8","IC",8,1
+"Cells/µL","CD8","IC",14,1
+"Cells/µL","CD8","IC",28,1
+"Cells/µL","CD8","IC",60,1
+"Cells/µL","CD8","SOL",8,1
+"Cells/µL","CD8","SOL",14,1
+"Cells/µL","CD8","SOL",28,1
+"Cells/µL","CD8","SOL",60,1
+"Cells/µL","CD8","TM",8,1
+"Cells/µL","CD8","TM",14,1
+"Cells/µL","CD8","TM",28,1
+"Cells/µL","CD8","TM",60,1
+"Cells/µL","CD8","TMd21",8,1
+"Cells/µL","CD8","TMd21",14,1
+"Cells/µL","CD8","TMd21",28,1
+"Cells/µL","CD8","TMd21",60,1
+"KLRG1+ CD127- effector (% tetramer)","CD8","IC",8,1
+"KLRG1+ CD127- effector (% tetramer)","CD8","IC",14,1
+"KLRG1+ CD127- effector (% tetramer)","CD8","IC",28,1
+"KLRG1+ CD127- effector (% tetramer)","CD8","IC",60,0
+"KLRG1+ CD127- effector (% tetramer)","CD8","SOL",8,1
+"KLRG1+ CD127- effector (% tetramer)","CD8","SOL",14,1
+"KLRG1+ CD127- effector (% tetramer)","CD8","SOL",28,1
+"KLRG1+ CD127- effector (% tetramer)","CD8","SOL",60,1
+"KLRG1+ CD127- effector (% tetramer)","CD8","TM",8,1
+"KLRG1+ CD127- effector (% tetramer)","CD8","TM",14,1
+"KLRG1+ CD127- effector (% tetramer)","CD8","TM",28,1
+"KLRG1+ CD127- effector (% tetramer)","CD8","TM",60,1
+"KLRG1+ CD127- effector (% tetramer)","CD8","TMd21",8,1
+"KLRG1+ CD127- effector (% tetramer)","CD8","TMd21",14,1
+"KLRG1+ CD127- effector (% tetramer)","CD8","TMd21",28,1
+"KLRG1+ CD127- effector (% tetramer)","CD8","TMd21",60,1
+"Ly6C+ FOXP3- Teff (% tetramer)","CD4","IC",8,1
+"Ly6C+ FOXP3- Teff (% tetramer)","CD4","IC",14,1
+"Ly6C+ FOXP3- Teff (% tetramer)","CD4","IC",28,1
+"Ly6C+ FOXP3- Teff (% tetramer)","CD4","IC",60,1
+"Ly6C+ FOXP3- Teff (% tetramer)","CD4","SOL",8,1
+"Ly6C+ FOXP3- Teff (% tetramer)","CD4","SOL",14,1
+"Ly6C+ FOXP3- Teff (% tetramer)","CD4","SOL",28,1
+"Ly6C+ FOXP3- Teff (% tetramer)","CD4","SOL",60,1
+"Ly6C+ FOXP3- Teff (% tetramer)","CD4","TM",8,1
+"Ly6C+ FOXP3- Teff (% tetramer)","CD4","TM",14,1
+"Ly6C+ FOXP3- Teff (% tetramer)","CD4","TM",28,1
+"Ly6C+ FOXP3- Teff (% tetramer)","CD4","TM",60,1
+"Ly6C+ FOXP3- Teff (% tetramer)","CD4","TMd21",8,1
+"Ly6C+ FOXP3- Teff (% tetramer)","CD4","TMd21",14,1
+"Ly6C+ FOXP3- Teff (% tetramer)","CD4","TMd21",28,1
+"Ly6C+ FOXP3- Teff (% tetramer)","CD4","TMd21",60,1
+"Number CD127+ CD62L+ CX3CR1-KLRG1- TCM","CD8","IC",8,1
+"Number CD127+ CD62L+ CX3CR1-KLRG1- TCM","CD8","IC",14,1
+"Number CD127+ CD62L+ CX3CR1-KLRG1- TCM","CD8","IC",28,1
+"Number CD127+ CD62L+ CX3CR1-KLRG1- TCM","CD8","IC",60,1
+"Number CD127+ CD62L+ CX3CR1-KLRG1- TCM","CD8","SOL",8,1
+"Number CD127+ CD62L+ CX3CR1-KLRG1- TCM","CD8","SOL",14,1
+"Number CD127+ CD62L+ CX3CR1-KLRG1- TCM","CD8","SOL",28,1
+"Number CD127+ CD62L+ CX3CR1-KLRG1- TCM","CD8","SOL",60,1
+"Number CD127+ CD62L+ CX3CR1-KLRG1- TCM","CD8","TM",8,1
+"Number CD127+ CD62L+ CX3CR1-KLRG1- TCM","CD8","TM",14,1
+"Number CD127+ CD62L+ CX3CR1-KLRG1- TCM","CD8","TM",28,1
+"Number CD127+ CD62L+ CX3CR1-KLRG1- TCM","CD8","TM",60,1
+"Number CD127+ CD62L+ CX3CR1-KLRG1- TCM","CD8","TMd21",8,1
+"Number CD127+ CD62L+ CX3CR1-KLRG1- TCM","CD8","TMd21",14,1
+"Number CD127+ CD62L+ CX3CR1-KLRG1- TCM","CD8","TMd21",28,1
+"Number CD127+ CD62L+ CX3CR1-KLRG1- TCM","CD8","TMd21",60,1
+"Number CD62L- CX3CR1hi TEM","CD8","IC",8,1
+"Number CD62L- CX3CR1hi TEM","CD8","IC",14,1
+"Number CD62L- CX3CR1hi TEM","CD8","IC",28,1
+"Number CD62L- CX3CR1hi TEM","CD8","IC",60,1
+"Number CD62L- CX3CR1hi TEM","CD8","SOL",8,1
+"Number CD62L- CX3CR1hi TEM","CD8","SOL",14,1
+"Number CD62L- CX3CR1hi TEM","CD8","SOL",28,1
+"Number CD62L- CX3CR1hi TEM","CD8","SOL",60,1
+"Number CD62L- CX3CR1hi TEM","CD8","TM",8,1
+"Number CD62L- CX3CR1hi TEM","CD8","TM",14,1
+"Number CD62L- CX3CR1hi TEM","CD8","TM",28,1
+"Number CD62L- CX3CR1hi TEM","CD8","TM",60,1
+"Number CD62L- CX3CR1hi TEM","CD8","TMd21",8,1
+"Number CD62L- CX3CR1hi TEM","CD8","TMd21",14,1
+"Number CD62L- CX3CR1hi TEM","CD8","TMd21",28,1
+"Number CD62L- CX3CR1hi TEM","CD8","TMd21",60,1
+"Number of CD127+ KLRG1- TCF1+ SLAMF6+ Tscm","CD8","IC",8,1
+"Number of CD127+ KLRG1- TCF1+ SLAMF6+ Tscm","CD8","IC",14,1
+"Number of CD127+ KLRG1- TCF1+ SLAMF6+ Tscm","CD8","IC",28,1
+"Number of CD127+ KLRG1- TCF1+ SLAMF6+ Tscm","CD8","IC",60,1
+"Number of CD127+ KLRG1- TCF1+ SLAMF6+ Tscm","CD8","SOL",8,1
+"Number of CD127+ KLRG1- TCF1+ SLAMF6+ Tscm","CD8","SOL",14,1
+"Number of CD127+ KLRG1- TCF1+ SLAMF6+ Tscm","CD8","SOL",28,1
+"Number of CD127+ KLRG1- TCF1+ SLAMF6+ Tscm","CD8","SOL",60,1
+"Number of CD127+ KLRG1- TCF1+ SLAMF6+ Tscm","CD8","TM",8,1
+"Number of CD127+ KLRG1- TCF1+ SLAMF6+ Tscm","CD8","TM",14,1
+"Number of CD127+ KLRG1- TCF1+ SLAMF6+ Tscm","CD8","TM",28,1
+"Number of CD127+ KLRG1- TCF1+ SLAMF6+ Tscm","CD8","TM",60,1
+"Number of CD127+ KLRG1- TCF1+ SLAMF6+ Tscm","CD8","TMd21",8,1
+"Number of CD127+ KLRG1- TCF1+ SLAMF6+ Tscm","CD8","TMd21",14,1
+"Number of CD127+ KLRG1- TCF1+ SLAMF6+ Tscm","CD8","TMd21",28,1
+"Number of CD127+ KLRG1- TCF1+ SLAMF6+ Tscm","CD8","TMd21",60,1
+"Number of CD127+ KLRG1- TCF1+ SLAMF6+ Tscm cells","CD8","IC",60,1
+"Number of CD127+ KLRG1- TCF1+ SLAMF6+ Tscm cells","CD8","SOL",60,1
+"Number of CD127+ KLRG1- TCF1+ SLAMF6+ Tscm cells","CD8","TM",60,1
+"Number of CD127+ KLRG1- TCF1+ SLAMF6+ Tscm cells","CD8","TMd21",60,1
+"Number of CD127+ KLRG1- TCF1+ SLAMF6+ Tsl cells","CD8","IC",8,1
+"Number of CD127+ KLRG1- TCF1+ SLAMF6+ Tsl cells","CD8","IC",28,1
+"Number of CD127+ KLRG1- TCF1+ SLAMF6+ Tsl cells","CD8","SOL",8,1
+"Number of CD127+ KLRG1- TCF1+ SLAMF6+ Tsl cells","CD8","SOL",28,1
+"Number of CD127+ KLRG1- TCF1+ SLAMF6+ Tsl cells","CD8","TM",8,1
+"Number of CD127+ KLRG1- TCF1+ SLAMF6+ Tsl cells","CD8","TM",28,1
+"Number of CD127+ KLRG1- TCF1+ SLAMF6+ Tsl cells","CD8","TMd21",8,1
+"Number of CD127+ KLRG1- TCF1+ SLAMF6+ Tsl cells","CD8","TMd21",28,1
+"Number of CD127+ KLRG1- memory","CD8","IC",8,1
+"Number of CD127+ KLRG1- memory","CD8","IC",14,1
+"Number of CD127+ KLRG1- memory","CD8","IC",28,1
+"Number of CD127+ KLRG1- memory","CD8","IC",60,1
+"Number of CD127+ KLRG1- memory","CD8","SOL",8,1
+"Number of CD127+ KLRG1- memory","CD8","SOL",14,1
+"Number of CD127+ KLRG1- memory","CD8","SOL",28,1
+"Number of CD127+ KLRG1- memory","CD8","SOL",60,1
+"Number of CD127+ KLRG1- memory","CD8","TM",8,1
+"Number of CD127+ KLRG1- memory","CD8","TM",14,1
+"Number of CD127+ KLRG1- memory","CD8","TM",28,1
+"Number of CD127+ KLRG1- memory","CD8","TM",60,1
+"Number of CD127+ KLRG1- memory","CD8","TMd21",8,1
+"Number of CD127+ KLRG1- memory","CD8","TMd21",14,1
+"Number of CD127+ KLRG1- memory","CD8","TMd21",28,1
+"Number of CD127+ KLRG1- memory","CD8","TMd21",60,1
+"Number of CD4 T cells","CD4","IC",8,1
+"Number of CD4 T cells","CD4","IC",14,1
+"Number of CD4 T cells","CD4","IC",28,1
+"Number of CD4 T cells","CD4","IC",60,1
+"Number of CD4 T cells","CD4","SOL",8,1
+"Number of CD4 T cells","CD4","SOL",14,1
+"Number of CD4 T cells","CD4","SOL",28,1
+"Number of CD4 T cells","CD4","SOL",60,1
+"Number of CD4 T cells","CD4","TM",8,1
+"Number of CD4 T cells","CD4","TM",14,1
+"Number of CD4 T cells","CD4","TM",28,1
+"Number of CD4 T cells","CD4","TM",60,1
+"Number of CD4 T cells","CD4","TMd21",8,1
+"Number of CD4 T cells","CD4","TMd21",14,1
+"Number of CD4 T cells","CD4","TMd21",28,1
+"Number of CD4 T cells","CD4","TMd21",60,1
+"Number of CD62L+ CX3CR1- TCM","CD8","IC",14,1
+"Number of CD62L+ CX3CR1- TCM","CD8","SOL",14,1
+"Number of CD62L+ CX3CR1- TCM","CD8","TM",14,1
+"Number of CD62L+ CX3CR1- TCM","CD8","TMd21",14,1
+"Number of CD8","CD8","IC",14,1
+"Number of CD8","CD8","SOL",14,1
+"Number of CD8","CD8","TM",14,1
+"Number of CD8","CD8","TMd21",14,1
+"Number of CD8 T cells","CD8","IC",8,1
+"Number of CD8 T cells","CD8","IC",14,1
+"Number of CD8 T cells","CD8","IC",28,1
+"Number of CD8 T cells","CD8","IC",60,1
+"Number of CD8 T cells","CD8","SOL",8,1
+"Number of CD8 T cells","CD8","SOL",14,1
+"Number of CD8 T cells","CD8","SOL",28,1
+"Number of CD8 T cells","CD8","SOL",60,1
+"Number of CD8 T cells","CD8","TM",8,1
+"Number of CD8 T cells","CD8","TM",14,1
+"Number of CD8 T cells","CD8","TM",28,1
+"Number of CD8 T cells","CD8","TM",60,1
+"Number of CD8 T cells","CD8","TMd21",8,1
+"Number of CD8 T cells","CD8","TMd21",14,1
+"Number of CD8 T cells","CD8","TMd21",28,1
+"Number of CD8 T cells","CD8","TMd21",60,1
+"Number of CXCR5+ PD-1+ CD127+ KLRG1- TFH like","CD8","IC",8,1
+"Number of CXCR5+ PD-1+ CD127+ KLRG1- TFH like","CD8","IC",14,1
+"Number of CXCR5+ PD-1+ CD127+ KLRG1- TFH like","CD8","IC",28,1
+"Number of CXCR5+ PD-1+ CD127+ KLRG1- TFH like","CD8","IC",60,1
+"Number of CXCR5+ PD-1+ CD127+ KLRG1- TFH like","CD8","SOL",8,1
+"Number of CXCR5+ PD-1+ CD127+ KLRG1- TFH like","CD8","SOL",14,1
+"Number of CXCR5+ PD-1+ CD127+ KLRG1- TFH like","CD8","SOL",28,1
+"Number of CXCR5+ PD-1+ CD127+ KLRG1- TFH like","CD8","SOL",60,1
+"Number of CXCR5+ PD-1+ CD127+ KLRG1- TFH like","CD8","TM",8,1
+"Number of CXCR5+ PD-1+ CD127+ KLRG1- TFH like","CD8","TM",14,1
+"Number of CXCR5+ PD-1+ CD127+ KLRG1- TFH like","CD8","TM",28,1
+"Number of CXCR5+ PD-1+ CD127+ KLRG1- TFH like","CD8","TM",60,1
+"Number of CXCR5+ PD-1+ CD127+ KLRG1- TFH like","CD8","TMd21",8,1
+"Number of CXCR5+ PD-1+ CD127+ KLRG1- TFH like","CD8","TMd21",14,1
+"Number of CXCR5+ PD-1+ CD127+ KLRG1- TFH like","CD8","TMd21",28,1
+"Number of CXCR5+ PD-1+ CD127+ KLRG1- TFH like","CD8","TMd21",60,1
+"Number of CXCR5+ PD-1+ TFH like","CD8","IC",28,1
+"Number of CXCR5+ PD-1+ TFH like","CD8","SOL",28,1
+"Number of CXCR5+ PD-1+ TFH like","CD8","TM",28,1
+"Number of CXCR5+ PD-1+ TFH like","CD8","TMd21",28,1
+"Number of KLRG1+ CD127- effector","CD8","IC",8,1
+"Number of KLRG1+ CD127- effector","CD8","IC",14,1
+"Number of KLRG1+ CD127- effector","CD8","IC",28,1
+"Number of KLRG1+ CD127- effector","CD8","IC",60,0
+"Number of KLRG1+ CD127- effector","CD8","SOL",8,1
+"Number of KLRG1+ CD127- effector","CD8","SOL",14,1
+"Number of KLRG1+ CD127- effector","CD8","SOL",28,1
+"Number of KLRG1+ CD127- effector","CD8","SOL",60,1
+"Number of KLRG1+ CD127- effector","CD8","TM",8,1
+"Number of KLRG1+ CD127- effector","CD8","TM",14,1
+"Number of KLRG1+ CD127- effector","CD8","TM",28,1
+"Number of KLRG1+ CD127- effector","CD8","TM",60,1
+"Number of KLRG1+ CD127- effector","CD8","TMd21",8,1
+"Number of KLRG1+ CD127- effector","CD8","TMd21",14,1
+"Number of KLRG1+ CD127- effector","CD8","TMd21",28,1
+"Number of KLRG1+ CD127- effector","CD8","TMd21",60,1
+"Number of Ly6C+ FOXP3- Teff cells","CD4","IC",8,1
+"Number of Ly6C+ FOXP3- Teff cells","CD4","IC",14,1
+"Number of Ly6C+ FOXP3- Teff cells","CD4","IC",28,1
+"Number of Ly6C+ FOXP3- Teff cells","CD4","IC",60,1
+"Number of Ly6C+ FOXP3- Teff cells","CD4","SOL",8,1
+"Number of Ly6C+ FOXP3- Teff cells","CD4","SOL",14,1
+"Number of Ly6C+ FOXP3- Teff cells","CD4","SOL",28,1
+"Number of Ly6C+ FOXP3- Teff cells","CD4","SOL",60,1
+"Number of Ly6C+ FOXP3- Teff cells","CD4","TM",8,1
+"Number of Ly6C+ FOXP3- Teff cells","CD4","TM",14,1
+"Number of Ly6C+ FOXP3- Teff cells","CD4","TM",28,1
+"Number of Ly6C+ FOXP3- Teff cells","CD4","TM",60,1
+"Number of Ly6C+ FOXP3- Teff cells","CD4","TMd21",8,1
+"Number of Ly6C+ FOXP3- Teff cells","CD4","TMd21",14,1
+"Number of Ly6C+ FOXP3- Teff cells","CD4","TMd21",28,1
+"Number of Ly6C+ FOXP3- Teff cells","CD4","TMd21",60,1
+"Number of TCM cells","CD4","IC",8,1
+"Number of TCM cells","CD4","IC",14,1
+"Number of TCM cells","CD4","IC",28,1
+"Number of TCM cells","CD4","IC",60,1
+"Number of TCM cells","CD4","SOL",8,1
+"Number of TCM cells","CD4","SOL",14,1
+"Number of TCM cells","CD4","SOL",28,1
+"Number of TCM cells","CD4","SOL",60,1
+"Number of TCM cells","CD4","TM",8,1
+"Number of TCM cells","CD4","TM",14,1
+"Number of TCM cells","CD4","TM",28,1
+"Number of TCM cells","CD4","TM",60,1
+"Number of TCM cells","CD4","TMd21",8,1
+"Number of TCM cells","CD4","TMd21",14,1
+"Number of TCM cells","CD4","TMd21",28,1
+"Number of TCM cells","CD4","TMd21",60,1
+"Number of TEM cells","CD4","IC",8,1
+"Number of TEM cells","CD4","IC",14,1
+"Number of TEM cells","CD4","IC",28,1
+"Number of TEM cells","CD4","IC",60,1
+"Number of TEM cells","CD4","SOL",8,1
+"Number of TEM cells","CD4","SOL",14,1
+"Number of TEM cells","CD4","SOL",28,1
+"Number of TEM cells","CD4","SOL",60,1
+"Number of TEM cells","CD4","TM",8,1
+"Number of TEM cells","CD4","TM",14,1
+"Number of TEM cells","CD4","TM",28,1
+"Number of TEM cells","CD4","TM",60,1
+"Number of TEM cells","CD4","TMd21",8,1
+"Number of TEM cells","CD4","TMd21",14,1
+"Number of TEM cells","CD4","TMd21",28,1
+"Number of TEM cells","CD4","TMd21",60,1
+"Number of TFH cells","CD4","IC",8,1
+"Number of TFH cells","CD4","IC",14,1
+"Number of TFH cells","CD4","IC",28,1
+"Number of TFH cells","CD4","IC",60,0
+"Number of TFH cells","CD4","SOL",8,1
+"Number of TFH cells","CD4","SOL",14,1
+"Number of TFH cells","CD4","SOL",28,1
+"Number of TFH cells","CD4","SOL",60,1
+"Number of TFH cells","CD4","TM",8,1
+"Number of TFH cells","CD4","TM",14,1
+"Number of TFH cells","CD4","TM",28,1
+"Number of TFH cells","CD4","TM",60,1
+"Number of TFH cells","CD4","TMd21",8,1
+"Number of TFH cells","CD4","TMd21",14,1
+"Number of TFH cells","CD4","TMd21",28,1
+"Number of TFH cells","CD4","TMd21",60,1
+"Number of Th1 cells","CD4","IC",8,1
+"Number of Th1 cells","CD4","IC",14,1
+"Number of Th1 cells","CD4","IC",28,1
+"Number of Th1 cells","CD4","IC",60,1
+"Number of Th1 cells","CD4","SOL",8,1
+"Number of Th1 cells","CD4","SOL",14,1
+"Number of Th1 cells","CD4","SOL",28,1
+"Number of Th1 cells","CD4","SOL",60,1
+"Number of Th1 cells","CD4","TM",8,1
+"Number of Th1 cells","CD4","TM",14,1
+"Number of Th1 cells","CD4","TM",28,1
+"Number of Th1 cells","CD4","TM",60,1
+"Number of Th1 cells","CD4","TMd21",8,1
+"Number of Th1 cells","CD4","TMd21",14,1
+"Number of Th1 cells","CD4","TMd21",28,1
+"Number of Th1 cells","CD4","TMd21",60,1
+"Number of Th17","CD4","IC",8,1
+"Number of Th17","CD4","IC",14,0.318119219457574
+"Number of Th17","CD4","IC",28,0
+"Number of Th17","CD4","IC",60,0.5
+"Number of Th17","CD4","SOL",8,1
+"Number of Th17","CD4","SOL",14,1
+"Number of Th17","CD4","SOL",60,1
+"Number of Th17","CD4","TM",8,1
+"Number of Th17","CD4","TM",14,1
+"Number of Th17","CD4","TM",28,1
+"Number of Th17","CD4","TM",60,1
+"Number of Th17","CD4","TMd21",8,1
+"Number of Th17","CD4","TMd21",14,1
+"Number of Th17","CD4","TMd21",28,1
+"Number of Th17","CD4","TMd21",60,1
+"Number of Th2 cells","CD4","IC",8,1
+"Number of Th2 cells","CD4","IC",14,1
+"Number of Th2 cells","CD4","IC",28,1
+"Number of Th2 cells","CD4","IC",60,1
+"Number of Th2 cells","CD4","SOL",8,1
+"Number of Th2 cells","CD4","SOL",14,1
+"Number of Th2 cells","CD4","SOL",28,1
+"Number of Th2 cells","CD4","SOL",60,1
+"Number of Th2 cells","CD4","TM",8,1
+"Number of Th2 cells","CD4","TM",14,1
+"Number of Th2 cells","CD4","TM",28,1
+"Number of Th2 cells","CD4","TM",60,1
+"Number of Th2 cells","CD4","TMd21",8,1
+"Number of Th2 cells","CD4","TMd21",14,1
+"Number of Th2 cells","CD4","TMd21",28,1
+"Number of Th2 cells","CD4","TMd21",60,1
+"Number of Tscm","CD8","IC",8,1
+"Number of Tscm","CD8","SOL",8,1
+"Number of Tscm","CD8","TM",8,1
+"Number of Tscm","CD8","TMd21",8,1
+"Number of bead events","CD8","IC",8,1
+"Number of bead events","CD8","IC",14,1
+"Number of bead events","CD8","IC",28,1
+"Number of bead events","CD8","IC",60,1
+"Number of bead events","CD8","SOL",8,1
+"Number of bead events","CD8","SOL",14,1
+"Number of bead events","CD8","SOL",28,1
+"Number of bead events","CD8","SOL",60,1
+"Number of bead events","CD8","TM",8,1
+"Number of bead events","CD8","TM",14,1
+"Number of bead events","CD8","TM",28,1
+"Number of bead events","CD8","TM",60,1
+"Number of bead events","CD8","TMd21",8,1
+"Number of bead events","CD8","TMd21",14,1
+"Number of bead events","CD8","TMd21",28,1
+"Number of bead events","CD8","TMd21",60,1
+"Number of cell events","CD8","IC",8,1
+"Number of cell events","CD8","IC",14,1
+"Number of cell events","CD8","IC",28,1
+"Number of cell events","CD8","IC",60,1
+"Number of cell events","CD8","SOL",8,1
+"Number of cell events","CD8","SOL",14,1
+"Number of cell events","CD8","SOL",28,1
+"Number of cell events","CD8","SOL",60,1
+"Number of cell events","CD8","TM",8,1
+"Number of cell events","CD8","TM",14,1
+"Number of cell events","CD8","TM",28,1
+"Number of cell events","CD8","TM",60,1
+"Number of cell events","CD8","TMd21",8,1
+"Number of cell events","CD8","TMd21",14,1
+"Number of cell events","CD8","TMd21",28,1
+"Number of cell events","CD8","TMd21",60,1
+"Number of tetramer+ cells","CD4","IC",8,1
+"Number of tetramer+ cells","CD4","IC",14,1
+"Number of tetramer+ cells","CD4","IC",28,1
+"Number of tetramer+ cells","CD4","IC",60,1
+"Number of tetramer+ cells","CD4","SOL",8,1
+"Number of tetramer+ cells","CD4","SOL",14,1
+"Number of tetramer+ cells","CD4","SOL",28,1
+"Number of tetramer+ cells","CD4","SOL",60,1
+"Number of tetramer+ cells","CD4","TM",8,1
+"Number of tetramer+ cells","CD4","TM",14,1
+"Number of tetramer+ cells","CD4","TM",28,1
+"Number of tetramer+ cells","CD4","TM",60,1
+"Number of tetramer+ cells","CD4","TMd21",8,1
+"Number of tetramer+ cells","CD4","TMd21",14,1
+"Number of tetramer+ cells","CD4","TMd21",28,1
+"Number of tetramer+ cells","CD4","TMd21",60,1
+"Number of tetramer+ cells","CD8","IC",8,1
+"Number of tetramer+ cells","CD8","IC",14,1
+"Number of tetramer+ cells","CD8","IC",28,1
+"Number of tetramer+ cells","CD8","IC",60,1
+"Number of tetramer+ cells","CD8","SOL",8,1
+"Number of tetramer+ cells","CD8","SOL",14,1
+"Number of tetramer+ cells","CD8","SOL",28,1
+"Number of tetramer+ cells","CD8","SOL",60,1
+"Number of tetramer+ cells","CD8","TM",8,1
+"Number of tetramer+ cells","CD8","TM",14,1
+"Number of tetramer+ cells","CD8","TM",28,1
+"Number of tetramer+ cells","CD8","TM",60,1
+"Number of tetramer+ cells","CD8","TMd21",8,1
+"Number of tetramer+ cells","CD8","TMd21",14,1
+"Number of tetramer+ cells","CD8","TMd21",28,1
+"Number of tetramer+ cells","CD8","TMd21",60,1
+"PD-1+ CXCR5+ BCL6+ TFH (% tetramer)","CD4","IC",8,1
+"PD-1+ CXCR5+ BCL6+ TFH (% tetramer)","CD4","IC",14,1
+"PD-1+ CXCR5+ BCL6+ TFH (% tetramer)","CD4","IC",28,1
+"PD-1+ CXCR5+ BCL6+ TFH (% tetramer)","CD4","IC",60,0
+"PD-1+ CXCR5+ BCL6+ TFH (% tetramer)","CD4","SOL",8,1
+"PD-1+ CXCR5+ BCL6+ TFH (% tetramer)","CD4","SOL",14,1
+"PD-1+ CXCR5+ BCL6+ TFH (% tetramer)","CD4","SOL",28,1
+"PD-1+ CXCR5+ BCL6+ TFH (% tetramer)","CD4","SOL",60,1
+"PD-1+ CXCR5+ BCL6+ TFH (% tetramer)","CD4","TM",8,1
+"PD-1+ CXCR5+ BCL6+ TFH (% tetramer)","CD4","TM",14,1
+"PD-1+ CXCR5+ BCL6+ TFH (% tetramer)","CD4","TM",28,1
+"PD-1+ CXCR5+ BCL6+ TFH (% tetramer)","CD4","TM",60,1
+"PD-1+ CXCR5+ BCL6+ TFH (% tetramer)","CD4","TMd21",8,1
+"PD-1+ CXCR5+ BCL6+ TFH (% tetramer)","CD4","TMd21",14,1
+"PD-1+ CXCR5+ BCL6+ TFH (% tetramer)","CD4","TMd21",28,1
+"PD-1+ CXCR5+ BCL6+ TFH (% tetramer)","CD4","TMd21",60,1
+"PD-1+ CXCR5+ TFH like (% memory)","CD8","IC",8,1
+"PD-1+ CXCR5+ TFH like (% memory)","CD8","IC",60,1
+"PD-1+ CXCR5+ TFH like (% memory)","CD8","SOL",8,1
+"PD-1+ CXCR5+ TFH like (% memory)","CD8","SOL",60,1
+"PD-1+ CXCR5+ TFH like (% memory)","CD8","TM",8,1
+"PD-1+ CXCR5+ TFH like (% memory)","CD8","TM",60,1
+"PD-1+ CXCR5+ TFH like (% memory)","CD8","TMd21",8,1
+"PD-1+ CXCR5+ TFH like (% memory)","CD8","TMd21",60,1
+"PD-1+ CXCR5+ TFH like (% tetramer)","CD8","IC",8,1
+"PD-1+ CXCR5+ TFH like (% tetramer)","CD8","IC",14,1
+"PD-1+ CXCR5+ TFH like (% tetramer)","CD8","IC",28,1
+"PD-1+ CXCR5+ TFH like (% tetramer)","CD8","IC",60,1
+"PD-1+ CXCR5+ TFH like (% tetramer)","CD8","SOL",8,1
+"PD-1+ CXCR5+ TFH like (% tetramer)","CD8","SOL",14,1
+"PD-1+ CXCR5+ TFH like (% tetramer)","CD8","SOL",28,1
+"PD-1+ CXCR5+ TFH like (% tetramer)","CD8","SOL",60,1
+"PD-1+ CXCR5+ TFH like (% tetramer)","CD8","TM",8,1
+"PD-1+ CXCR5+ TFH like (% tetramer)","CD8","TM",14,1
+"PD-1+ CXCR5+ TFH like (% tetramer)","CD8","TM",28,1
+"PD-1+ CXCR5+ TFH like (% tetramer)","CD8","TM",60,1
+"PD-1+ CXCR5+ TFH like (% tetramer)","CD8","TMd21",8,1
+"PD-1+ CXCR5+ TFH like (% tetramer)","CD8","TMd21",14,1
+"PD-1+ CXCR5+ TFH like (% tetramer)","CD8","TMd21",28,1
+"PD-1+ CXCR5+ TFH like (% tetramer)","CD8","TMd21",60,1
+"TCF1+ SLAMF6+ Tscm (% TCM)","CD8","IC",60,1
+"TCF1+ SLAMF6+ Tscm (% TCM)","CD8","SOL",60,1
+"TCF1+ SLAMF6+ Tscm (% TCM)","CD8","TM",60,1
+"TCF1+ SLAMF6+ Tscm (% TCM)","CD8","TMd21",60,1
+"TCF1+ SLAMF6+ Tsl (% memory)","CD8","IC",8,1
+"TCF1+ SLAMF6+ Tsl (% memory)","CD8","IC",28,1
+"TCF1+ SLAMF6+ Tsl (% memory)","CD8","SOL",8,1
+"TCF1+ SLAMF6+ Tsl (% memory)","CD8","SOL",28,1
+"TCF1+ SLAMF6+ Tsl (% memory)","CD8","TM",8,1
+"TCF1+ SLAMF6+ Tsl (% memory)","CD8","TM",28,1
+"TCF1+ SLAMF6+ Tsl (% memory)","CD8","TMd21",8,1
+"TCF1+ SLAMF6+ Tsl (% memory)","CD8","TMd21",28,1
+"Tetramer+  (% CD4)","CD4","IC",8,1
+"Tetramer+  (% CD4)","CD4","IC",14,1
+"Tetramer+  (% CD4)","CD4","IC",28,1
+"Tetramer+  (% CD4)","CD4","IC",60,1
+"Tetramer+  (% CD4)","CD4","SOL",8,1
+"Tetramer+  (% CD4)","CD4","SOL",14,1
+"Tetramer+  (% CD4)","CD4","SOL",28,1
+"Tetramer+  (% CD4)","CD4","SOL",60,1
+"Tetramer+  (% CD4)","CD4","TM",8,1
+"Tetramer+  (% CD4)","CD4","TM",14,1
+"Tetramer+  (% CD4)","CD4","TM",28,1
+"Tetramer+  (% CD4)","CD4","TM",60,1
+"Tetramer+  (% CD4)","CD4","TMd21",8,1
+"Tetramer+  (% CD4)","CD4","TMd21",14,1
+"Tetramer+  (% CD4)","CD4","TMd21",28,1
+"Tetramer+  (% CD4)","CD4","TMd21",60,1
+"Tetramer+ (% CD8 T cells)","CD8","IC",14,1
+"Tetramer+ (% CD8 T cells)","CD8","SOL",14,1
+"Tetramer+ (% CD8 T cells)","CD8","TM",14,1
+"Tetramer+ (% CD8 T cells)","CD8","TMd21",14,1
+"Tetramer+ (% of CD8)","CD8","IC",8,1
+"Tetramer+ (% of CD8)","CD8","IC",14,1
+"Tetramer+ (% of CD8)","CD8","IC",28,1
+"Tetramer+ (% of CD8)","CD8","IC",60,1
+"Tetramer+ (% of CD8)","CD8","SOL",8,1
+"Tetramer+ (% of CD8)","CD8","SOL",14,1
+"Tetramer+ (% of CD8)","CD8","SOL",28,1
+"Tetramer+ (% of CD8)","CD8","SOL",60,1
+"Tetramer+ (% of CD8)","CD8","TM",8,1
+"Tetramer+ (% of CD8)","CD8","TM",14,1
+"Tetramer+ (% of CD8)","CD8","TM",28,1
+"Tetramer+ (% of CD8)","CD8","TM",60,1
+"Tetramer+ (% of CD8)","CD8","TMd21",8,1
+"Tetramer+ (% of CD8)","CD8","TMd21",14,1
+"Tetramer+ (% of CD8)","CD8","TMd21",28,1
+"Tetramer+ (% of CD8)","CD8","TMd21",60,1
+"Total cells in sample","CD4","IC",8,1
+"Total cells in sample","CD4","IC",14,1
+"Total cells in sample","CD4","IC",28,1
+"Total cells in sample","CD4","IC",60,1
+"Total cells in sample","CD4","SOL",8,1
+"Total cells in sample","CD4","SOL",14,1
+"Total cells in sample","CD4","SOL",28,1
+"Total cells in sample","CD4","SOL",60,1
+"Total cells in sample","CD4","TM",8,1
+"Total cells in sample","CD4","TM",14,1
+"Total cells in sample","CD4","TM",28,1
+"Total cells in sample","CD4","TM",60,1
+"Total cells in sample","CD4","TMd21",8,1
+"Total cells in sample","CD4","TMd21",14,1
+"Total cells in sample","CD4","TMd21",28,1
+"Total cells in sample","CD4","TMd21",60,1
+"Total sample vol (µL)","CD8","IC",8,1
+"Total sample vol (µL)","CD8","IC",14,1
+"Total sample vol (µL)","CD8","IC",28,1
+"Total sample vol (µL)","CD8","IC",60,1
+"Total sample vol (µL)","CD8","SOL",8,1
+"Total sample vol (µL)","CD8","SOL",14,1
+"Total sample vol (µL)","CD8","SOL",28,1
+"Total sample vol (µL)","CD8","SOL",60,1
+"Total sample vol (µL)","CD8","TM",8,1
+"Total sample vol (µL)","CD8","TM",14,1
+"Total sample vol (µL)","CD8","TM",28,1
+"Total sample vol (µL)","CD8","TM",60,1
+"Total sample vol (µL)","CD8","TMd21",8,1
+"Total sample vol (µL)","CD8","TMd21",14,1
+"Total sample vol (µL)","CD8","TMd21",28,1
+"Total sample vol (µL)","CD8","TMd21",60,1

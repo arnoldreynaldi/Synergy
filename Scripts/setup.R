@@ -6,9 +6,9 @@ library(purrr)
 library(glue)
 library(ggplot2)
 
-file_path <- "C:/Users/z3443623/OneDrive - UNSW/Synergy"
+file_path <- "C:/Projects/Synergy"
 
-onedrivefolder = glue("C:/Users/z3443623/OneDrive - UNSW/Synergy")
+onedrivefolder = glue("C:/Projects/Synergy")
 
 figure_folder = glue("{onedrivefolder}/output/plots/")
 
