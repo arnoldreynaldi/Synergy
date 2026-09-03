@@ -1,14 +1,22 @@
-# Function to compute, normalize, plot, and save summaries for a given statistic
 process_summary <- function(stat = c("median", "mean")) {
   stat <- match.arg(stat)
   stat_fun <- if (stat == "median") median else mean
   stat_label <- tools::toTitleCase(stat)
   
-  # Create folders
+  # Folders
   plot_dir <- file.path(figure_folder, paste0("Normalised_", stat))
   table_dir <- file.path(table_folder, paste0("Normalised_", stat))
   dir.create(plot_dir, recursive = TRUE, showWarnings = FALSE)
   dir.create(table_dir, recursive = TRUE, showWarnings = FALSE)
+  
+  # Vaccine order and colours
+  vaccine_levels <- c("TM", "TMd21", "SOL", "IC")
+  formulation_cols <- c(
+    TM    = "#2F75B5",
+    TMd21 = "#D99A2B",
+    SOL   = "#4A9E7D",
+    IC    = "#B86691"
+  )
   
   # Compute summary for each combination
   summary_list <- list()
@@ -51,24 +59,43 @@ process_summary <- function(stat = c("median", "mean")) {
     cell_type <- plot_combinations$Cell_Type[i]
     
     sub_norm <- normalised %>%
-      filter(Measurement_type == meas, Cell_Type == cell_type)
+      filter(Measurement_type == meas, Cell_Type == cell_type) %>%
+      mutate(Vaccine = factor(Vaccine, levels = vaccine_levels))
     
     if (nrow(sub_norm) == 0) next
     
     unit_label <- unique(sub_norm$Unit)[1]
     
+    # Map unit to display label for title
+    unit_label_display <- switch(
+      unit_label,
+      "number" = "Number of Cells",
+      "percentage" = "%",
+      unit_label
+    )
+    
     p <- ggplot(sub_norm, aes(x = Day, y = normalised, color = Vaccine)) +
-      geom_line(size = 1) +
-      geom_point(size = 2) +
+      geom_line(linewidth = 0.8) +
+      geom_point(size = 2.5) +
       labs(
-        title = paste0(meas, "  [", unit_label, "]  (normalised ", stat_label, ")"),
+        title = paste0(meas, " [", unit_label_display, "] (normalised ", stat_label, ")"),
         x = "Day",
         y = paste("normalised", stat_label, "(fold change)"),
         color = "Vaccine"
       ) +
-      theme_bw(base_size = 12) +
-      theme(plot.title = element_text(size = 11, face = "bold"),
-            legend.position = "right")
+      scale_color_manual(
+        values = formulation_cols,
+        breaks = vaccine_levels
+      ) +
+      theme_bw(base_size = 14) +
+      theme(
+        plot.title = element_text(size = 16, face = "bold"),
+        axis.title = element_text(size = 14),
+        axis.text = element_text(size = 12),
+        legend.title = element_text(size = 14),
+        legend.text = element_text(size = 12),
+        legend.position = "right"
+      )
     
     if (unit_label == "number") p <- p + scale_y_log10()
     
