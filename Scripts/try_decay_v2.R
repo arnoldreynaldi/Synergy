@@ -1,12 +1,38 @@
+# =====================================================
+# Master script: Decay modelling for all CD4/CD8 number measurements
+# - White background plots
+# - Remove Mouse_number 11171 for CD4
+# - Save plots and tables in separate directories per cell type and measurement type
+# - Consistent vaccine colour scheme
+# =====================================================
+
+library(dplyr)
+library(ggplot2)
 
 # Set global theme to white background
 theme_set(theme_bw())
 
-# Function to clean folder names 
+# Base directories
+figure_folder <- "C:/Projects/Synergy/output/plots/"
+table_folder  <- "C:/Projects/Synergy/output/tables/"
+
+# Vaccine order and colours
+vaccine_levels <- c("TM", "TMd21", "SOL", "IC")
+formulation_cols <- c(
+  TM    = "#2F75B5",
+  TMd21 = "#D99A2B",
+  SOL   = "#4A9E7D",
+  IC    = "#B86691"
+)
+
+# Function to sanitize folder names
 sanitize <- function(x) gsub("[^A-Za-z0-9_]", "_", x)
 
 # Main analysis function
 run_analysis <- function(data, cell_type, measurement_type) {
+  
+  cat("\n====================\n")
+  cat("Running analysis for:", cell_type, "-", measurement_type, "\n")
   
   # Filter data
   subset_df <- data %>%
@@ -15,26 +41,28 @@ run_analysis <- function(data, cell_type, measurement_type) {
            Unit == "number") %>%
     mutate(log10_Value = log10(Value))
   
-  # Remove any rows with non-finite log values (Value <= 0)
+  # Remove rows with non-finite log values
   subset_df <- subset_df %>% filter(is.finite(log10_Value))
   
-  # If CD4, remove Mouse_number == 11171
+  # Remove Mouse_number 11171 for CD4
   if (cell_type == "CD4") {
     subset_df <- subset_df %>% filter(Mouse_number != 11171)
   }
   
-  # Check minimum observations per vaccine (need at least 3 points per vaccine for lm)
+  # Check minimum observations per vaccine
   n_per_vaccine <- subset_df %>% group_by(Vaccine) %>% summarise(n = n())
   if (any(n_per_vaccine$n < 3)) {
+    cat("Skipping: insufficient data (some vaccine has less than 3 observations).\n")
+    return(NULL)
   }
   
-  # Define vaccine order
-  vaccines <- c("TM", "TMd21", "SOL", "IC")
-  vaccines <- intersect(vaccines, unique(subset_df$Vaccine))
+  # Ensure vaccine factor levels match the desired order
+  subset_df$Vaccine <- factor(subset_df$Vaccine, levels = vaccine_levels)
+  vaccines <- levels(droplevels(subset_df$Vaccine))
   if (length(vaccines) < 2) {
+    cat("Skipping: fewer than 2 vaccine groups present.\n")
+    return(NULL)
   }
-  
-  subset_df$Vaccine <- factor(subset_df$Vaccine, levels = vaccines)
   
   # ---------------------------
   # Simple linear model (per vaccine)
@@ -103,34 +131,41 @@ run_analysis <- function(data, cell_type, measurement_type) {
   }))
   
   # ---------------------------
-  # Coefficient plots
+  # Coefficient plots (coloured by vaccine)
   # ---------------------------
-  plot_coef <- function(data, param, title, color) {
+  plot_coef <- function(data, param, title) {
     data %>% filter(Parameter == param) %>%
-      ggplot(aes(x = Vaccine, y = Estimate)) +
-      geom_point(size = 3, color = color) +
-      geom_errorbar(aes(ymin = Lower, ymax = Upper), width = 0.2, color = color) +
+      ggplot(aes(x = Vaccine, y = Estimate, color = Vaccine)) +
+      geom_point(size = 3) +
+      geom_errorbar(aes(ymin = Lower, ymax = Upper), width = 0.2) +
+      scale_color_manual(values = formulation_cols, drop = FALSE) +
       labs(title = title, y = "Estimate") +
-      theme_bw()
+      theme_bw() +
+      theme(legend.position = "none")
   }
   
-  p1 <- plot_coef(lm_params, "Intercept", "Intercept (Linear)", "steelblue")
-  p2 <- plot_coef(lm_params, "Slope", "Slope (Linear)", "darkred")
-  p3 <- plot_coef(piecewise_params, "Intercept", "Intercept (Piecewise)", "forestgreen")
-  p4 <- plot_coef(piecewise_params, "Slope_before", "Slope before breakpoint", "purple")
-  p5 <- plot_coef(piecewise_params, "Slope_after", "Slope after breakpoint", "orange")
+  p1 <- plot_coef(lm_params, "Intercept", "Intercept (Linear)")
+  p2 <- plot_coef(lm_params, "Slope", "Slope (Linear)")
+  p3 <- plot_coef(piecewise_params, "Intercept", "Intercept (Piecewise)")
+  p4 <- plot_coef(piecewise_params, "Slope_before", "Slope before breakpoint")
+  p5 <- plot_coef(piecewise_params, "Slope_after", "Slope after breakpoint")
   
+  # Model vs data plots with vaccine colour scheme
   plot_lm_fit <- ggplot(subset_df, aes(x = Day, y = log10_Value, color = Vaccine)) +
     geom_point(alpha = 0.6) +
     geom_line(data = lm_fitted, aes(y = Fitted), size = 1) +
+    scale_color_manual(values = formulation_cols, drop = FALSE) +
     labs(title = "Linear model fit (log10 scale)", y = "log10(Value)", x = "Day") +
-    facet_wrap(~Vaccine) + theme_bw()
+    facet_wrap(~Vaccine) +
+    theme_bw()
   
   plot_piecewise_fit <- ggplot(subset_df, aes(x = Day, y = log10_Value, color = Vaccine)) +
     geom_point(alpha = 0.6) +
     geom_line(data = piecewise_fitted, aes(y = Fitted), size = 1) +
+    scale_color_manual(values = formulation_cols, drop = FALSE) +
     labs(title = "Best piecewise model fit (log10 scale)", y = "log10(Value)", x = "Day") +
-    facet_wrap(~Vaccine) + theme_bw()
+    facet_wrap(~Vaccine) +
+    theme_bw()
   
   # ---------------------------
   # Slope grouping analysis
@@ -209,15 +244,13 @@ run_analysis <- function(data, cell_type, measurement_type) {
   full_table <- full_table[order(full_table$AIC), ]
   
   # ---------------------------
-  # Create output directories and save
+  # Save outputs
   # ---------------------------
-  # Subfolder for this specific measurement type
   plot_base <- file.path(figure_folder, paste0(cell_type, "_analysis"), sanitize(measurement_type))
   table_base <- file.path(table_folder, paste0(cell_type, "_analysis"), sanitize(measurement_type))
   dir.create(plot_base, recursive = TRUE, showWarnings = FALSE)
   dir.create(table_base, recursive = TRUE, showWarnings = FALSE)
   
-  # Save plots
   ggsave(file.path(plot_base, "1_Intercept_Linear.png"), p1, width = 6, height = 4)
   ggsave(file.path(plot_base, "2_Slope_Linear.png"), p2, width = 6, height = 4)
   ggsave(file.path(plot_base, "3_Intercept_Piecewise.png"), p3, width = 6, height = 4)
@@ -226,7 +259,6 @@ run_analysis <- function(data, cell_type, measurement_type) {
   ggsave(file.path(plot_base, "6_LM_fit.png"), plot_lm_fit, width = 8, height = 5)
   ggsave(file.path(plot_base, "7_Piecewise_fit.png"), plot_piecewise_fit, width = 8, height = 5)
   
-  # Save tables (CSV)
   write.csv(lm_params, file.path(table_base, "linear_params.csv"), row.names = FALSE)
   write.csv(piecewise_params, file.path(table_base, "piecewise_params.csv"), row.names = FALSE)
   write.csv(full_table, file.path(table_base, "AIC_table.csv"), row.names = FALSE)
@@ -236,12 +268,14 @@ run_analysis <- function(data, cell_type, measurement_type) {
 }
 
 # =====================================================
-# Main loop over all CD4/CD8 number measurements
+# Main loop
 # =====================================================
 combos <- combined_data %>%
   filter(Unit == "number", Cell_Type %in% c("CD4", "CD8")) %>%
   distinct(Cell_Type, Measurement_type) %>%
   arrange(Cell_Type, Measurement_type)
+
+cat("Total analyses to run:", nrow(combos), "\n")
 
 for (i in 1:nrow(combos)) {
   ct <- combos$Cell_Type[i]
@@ -249,6 +283,9 @@ for (i in 1:nrow(combos)) {
   tryCatch(
     run_analysis(combined_data, ct, mt),
     error = function(e) {
+      cat("ERROR for", ct, "-", mt, ":", e$message, "\n")
     }
   )
 }
+
+cat("\nAll done.\n")
