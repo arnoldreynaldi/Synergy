@@ -33,3 +33,17 @@ output_folder_Tcell_master <- glue("{onedrivefolder}/data/T cell data")
 
 # Define the columns that are NOT measurements
 non_measurement_cols <- c("Exp label", "Vaccine", "Sex", "Mouse #", "Exclude (Y/N)")
+
+
+
+theme_set(theme_bw())
+
+vaccine_levels <- c("TM", "TMd21", "SOL", "IC")
+formulation_cols <- c(
+  TM    = "#2F75B5",
+  TMd21 = "#D99A2B",
+  SOL   = "#4A9E7D",
+  IC    = "#B86691"
+)
+
+subject_to_exclude = c(11171, 10236)

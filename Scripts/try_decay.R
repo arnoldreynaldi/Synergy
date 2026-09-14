@@ -1,17 +1,4 @@
 
-library(dplyr)
-library(ggplot2)
-
-theme_set(theme_bw())
-
-vaccine_levels <- c("TM", "TMd21", "SOL", "IC")
-formulation_cols <- c(
-  TM    = "#2F75B5",
-  TMd21 = "#D99A2B",
-  SOL   = "#4A9E7D",
-  IC    = "#B86691"
-)
-
 sanitize <- function(x) gsub("[^A-Za-z0-9_]", "_", x)
 
 safe_predict <- function(model, newdata) {
@@ -20,10 +7,6 @@ safe_predict <- function(model, newdata) {
 }
 
 run_analysis <- function(data, cell_type, measurement_type) {
-  
-  cat("\n====================\n")
-  cat("Running analysis for:", cell_type, "-", measurement_type, "\n")
-  
   subset_df <- data %>%
     filter(Cell_Type == cell_type,
            Measurement_type == measurement_type,
@@ -32,20 +15,16 @@ run_analysis <- function(data, cell_type, measurement_type) {
   
   subset_df <- subset_df %>% filter(is.finite(log10_Value))
   
-  if (cell_type == "CD4") {
-    subset_df <- subset_df %>% filter(Mouse_number != 11171)
-  }
+  subset_df <- subset_df %>% filter(!Mouse_number %in% subject_to_exclude)
   
   n_per_vaccine <- subset_df %>% group_by(Vaccine) %>% summarise(n = n())
   if (any(n_per_vaccine$n < 1)) {
-    cat("Skipping: insufficient data (some vaccine has less than 1 observations).\n")
     return(NULL)
   }
   
   subset_df$Vaccine <- factor(subset_df$Vaccine, levels = vaccine_levels)
   vaccines <- levels(droplevels(subset_df$Vaccine))
   if (length(vaccines) < 1) {
-    cat("Skipping: fewer than 1 vaccine groups present.\n")
     return(NULL)
   }
   
@@ -225,7 +204,6 @@ run_analysis <- function(data, cell_type, measurement_type) {
   # Filter out any NULLs
   all_models <- Filter(function(x) !is.null(x) && !is.null(x$model), all_models)
   if (length(all_models) == 0) {
-    cat("No valid models found. Skipping.\n")
     return(NULL)
   }
   
@@ -358,7 +336,6 @@ run_analysis <- function(data, cell_type, measurement_type) {
   
   write.csv(combined_table, file.path(table_base, "AIC_table_full_search.csv"), row.names = FALSE)
   
-  cat("Saved outputs to:\n  Plots: ", plot_base, "\n  Tables: ", table_base, "\n")
   return(combined_table)
 }
 
@@ -368,17 +345,12 @@ combos <- combined_data %>%
   distinct(Cell_Type, Measurement_type) %>%
   arrange(Cell_Type, Measurement_type)
 
-cat("Total analyses to run:", nrow(combos), "\n")
-
 for (i in 1:nrow(combos)) {
   ct <- combos$Cell_Type[i]
   mt <- combos$Measurement_type[i]
   tryCatch(
     run_analysis(combined_data, ct, mt),
     error = function(e) {
-      cat("ERROR for", ct, "-", mt, ":", e$message, "\n")
     }
   )
 }
-
-cat("\nAll done.\n")
