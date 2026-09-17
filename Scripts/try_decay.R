@@ -117,14 +117,14 @@ run_analysis <- function(data, cell_type, measurement_type) {
     geom_point(alpha = 0.6) +
     geom_line(data = lm_fitted, aes(y = Fitted), size = 1) +
     scale_color_manual(values = formulation_cols, drop = FALSE) +
-    labs(title = "Linear model fit (log10 scale)", y = "log10(Value)", x = "Day") +
+    labs(title = "Linear model fit (log10 scale)", y = "log10(Cell count)", x = "Day") +
     facet_wrap(~Vaccine) + theme_bw()
   
   plot_piecewise_fit <- ggplot(subset_df, aes(x = Day, y = log10_Value, color = Vaccine)) +
     geom_point(alpha = 0.6) +
     geom_line(data = piecewise_fitted, aes(y = Fitted), size = 1) +
     scale_color_manual(values = formulation_cols, drop = FALSE) +
-    labs(title = "Best piecewise model fit (log10 scale)", y = "log10(Value)", x = "Day") +
+    labs(title = "Best piecewise model fit (log10 scale)", y = "log10(Cell count)", x = "Day") +
     facet_wrap(~Vaccine) + theme_bw()
   
   # Full search
@@ -293,7 +293,7 @@ run_analysis <- function(data, cell_type, measurement_type) {
       geom_line(data = pred_data, aes(y = Fitted), size = 1) +
       scale_color_manual(values = formulation_cols, drop = FALSE) +
       labs(title = plot_title, subtitle = subtitle,
-           y = "log10(Value)", x = "Day") +
+           y = "log10(Cell count)", x = "Day") +
       facet_wrap(~Vaccine) +
       theme_bw()
   }
