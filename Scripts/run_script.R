@@ -13,3 +13,5 @@ source("./processing/01_combine_files.R")
 # Source all the plotting and analysis files
 source("./analysis/01_plotting_with_summary.R")
 source("./analysis/02_normalised_remaining_quantity.R")
+source("./analysis/03_decay_analysis.R")
+source("./analysis/04_ratio_plot.R")
