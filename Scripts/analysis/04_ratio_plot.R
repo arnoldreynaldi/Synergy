@@ -1,17 +1,6 @@
 # ==================================================================
-# Ratio plots — full batch
-# Style: individual mice + mean + 95% bootstrap CI (linear axis)
-# Full y-axis, no clipping, thick CI bars, thick connecting lines,
-# big axis labels
-# Title shows the FULL marker names; y-axis just says "Ratio"
+# Ratio plots 
 # ==================================================================
-
-suppressPackageStartupMessages({
-  library(dplyr)
-  library(tidyr)
-  library(ggplot2)
-})
-
 # ------------------------------------------------------------------
 # 0. Defaults if not already in the environment
 # ------------------------------------------------------------------
@@ -45,7 +34,7 @@ boot_mean_ci <- function(x, n_boot = 5000, conf = 0.95) {
 }
 
 # ------------------------------------------------------------------
-# 2. Generic ratio plotter
+# 2. Generic ratio plotter (linear + log10)
 # ------------------------------------------------------------------
 plot_ratio <- function(numerator_label,
                        denominator_label,
@@ -131,76 +120,95 @@ plot_ratio <- function(numerator_label,
   )
   y_txt <- "Ratio"
   
-  p <- ggplot(
-    ratio_data,
-    aes(x = Day, y = Ratio, color = Vaccine)
-  ) +
-    geom_point(
-      position = position_jitterdodge(
-        jitter.width  = jitter_w,
-        jitter.height = 0,
-        dodge.width   = dodge_w
-      ),
-      size  = 1.8,
-      alpha = 0.6,
-      na.rm = TRUE
+  # ---- Build a plot for a given y-scale ----
+  build_plot <- function(dat, scale_type = c("linear", "log10")) {
+    scale_type <- match.arg(scale_type)
+    
+    p <- ggplot(
+      dat,
+      aes(x = Day, y = Ratio, color = Vaccine)
     ) +
-    stat_summary(
-      aes(group = Vaccine),
-      fun.data    = function(x) boot_mean_ci(x, n_boot = n_boot),
-      geom        = "errorbar",
-      width       = ci_w,
-      linewidth   = 1.6,
-      position    = position_dodge(width = dodge_w),
-      na.rm       = TRUE,
-      show.legend = FALSE
-    ) +
-    stat_summary(
-      aes(group = Vaccine),
-      fun      = mean,
-      geom     = "point",
-      size     = 2.5,
-      position = position_dodge(width = dodge_w),
-      na.rm    = TRUE
-    ) +
-    stat_summary(
-      aes(group = Vaccine),
-      fun       = mean,
-      geom      = "line",
-      linewidth = 1.8,
-      position  = position_dodge(width = dodge_w),
-      na.rm     = TRUE
-    ) +
-    labs(
-      title = title_txt,
-      x     = "Day",
-      y     = y_txt,
-      color = "Vaccine"
-    ) +
-    scale_x_continuous(
-      breaks = sort(unique(ratio_data$Day)),
-      expand = expansion(mult = c(0.03, 0.05))
-    ) +
-    scale_color_manual(
-      values       = formulation_cols,
-      breaks       = vaccine_levels,
-      na.translate = FALSE
-    ) +
-    scale_y_continuous(
-      expand = expansion(mult = c(0.02, 0.05))
-    ) +
-    theme_bw(base_size = 16) +
-    theme(
-      plot.title         = element_text(size = 15, face = "bold"),
-      axis.title         = element_text(size = 18, face = "bold"),
-      axis.text          = element_text(size = 15),
-      legend.title       = element_text(size = 16),
-      legend.text        = element_text(size = 14),
-      legend.position    = "right",
-      panel.grid.minor   = element_blank(),
-      panel.grid.major.x = element_blank()
-    )
+      geom_point(
+        position = position_jitterdodge(
+          jitter.width  = jitter_w,
+          jitter.height = 0,
+          dodge.width   = dodge_w
+        ),
+        size  = 1.8,
+        alpha = 0.6,
+        na.rm = TRUE
+      ) +
+      stat_summary(
+        aes(group = Vaccine),
+        fun.data    = function(x) boot_mean_ci(x, n_boot = n_boot),
+        geom        = "errorbar",
+        width       = ci_w,
+        linewidth   = 1.6,
+        position    = position_dodge(width = dodge_w),
+        na.rm       = TRUE,
+        show.legend = FALSE
+      ) +
+      stat_summary(
+        aes(group = Vaccine),
+        fun      = mean,
+        geom     = "point",
+        size     = 2.5,
+        position = position_dodge(width = dodge_w),
+        na.rm    = TRUE
+      ) +
+      stat_summary(
+        aes(group = Vaccine),
+        fun       = mean,
+        geom      = "line",
+        linewidth = 1.8,
+        position  = position_dodge(width = dodge_w),
+        na.rm     = TRUE
+      ) +
+      labs(
+        title = if (scale_type == "log10")
+          paste0(title_txt, "  (log10)")
+        else
+          title_txt,
+        x     = "Day",
+        y     = if (scale_type == "log10") "Ratio (log10 scale)" else y_txt,
+        color = "Vaccine"
+      ) +
+      scale_x_continuous(
+        breaks = sort(unique(dat$Day)),
+        expand = expansion(mult = c(0.03, 0.05))
+      ) +
+      scale_color_manual(
+        values       = formulation_cols,
+        breaks       = vaccine_levels,
+        na.translate = FALSE
+      ) +
+      theme_bw(base_size = 16) +
+      theme(
+        plot.title         = element_text(size = 15, face = "bold"),
+        axis.title         = element_text(size = 18, face = "bold"),
+        axis.text          = element_text(size = 15),
+        legend.title       = element_text(size = 16),
+        legend.text        = element_text(size = 14),
+        legend.position    = "right",
+        panel.grid.minor   = element_blank(),
+        panel.grid.major.x = element_blank()
+      )
+    
+    if (scale_type == "log10") {
+      p <- p + scale_y_log10(
+        breaks = scales::breaks_log(n = 6),
+        labels = scales::label_log(base = 10),
+        expand = expansion(mult = c(0.05, 0.05))
+      )
+    } else {
+      p <- p + scale_y_continuous(
+        expand = expansion(mult = c(0.02, 0.05))
+      )
+    }
+    p
+  }
   
+  # ---- File names ----
   if (is.null(file_stub)) {
     safe <- function(s) gsub("[^A-Za-z0-9]+", "_", s)
     file_stub <- paste0(
@@ -212,14 +220,42 @@ plot_ratio <- function(numerator_label,
   out_dir <- file.path(figure_folder, "Ratio")
   dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
   
+  # ---- 1) Linear version ----
+  p_lin <- build_plot(ratio_data, "linear")
   ggsave(
     filename = file.path(out_dir, paste0(file_stub, ".png")),
-    plot     = p,
+    plot     = p_lin,
     width    = 10,
     height   = 6.5,
     dpi      = 300
   )
   
+  # ---- 2) log10 version (requires strictly positive ratios) ----
+  ratio_data_log <- ratio_data %>%
+    filter(is.finite(Ratio), Ratio > 0)
+  
+  n_dropped <- nrow(ratio_data) - nrow(ratio_data_log)
+  if (n_dropped > 0) {
+    message("   log10: dropped ", n_dropped,
+            " non-positive ratio value(s)")
+  }
+  
+  p_log <- NULL
+  if (nrow(ratio_data_log) > 0) {
+    p_log <- build_plot(ratio_data_log, "log10")
+    ggsave(
+      filename = file.path(out_dir, paste0(file_stub, "_log10.png")),
+      plot     = p_log,
+      width    = 10,
+      height   = 6.5,
+      dpi      = 300
+    )
+  } else {
+    warning("SKIP log10 for ", numerator_short, "/", denominator_short,
+            ": no positive ratio values")
+  }
+  
+  # ---- Summary table (linear-scale summary) ----
   ratio_summary <- ratio_data %>%
     group_by(Day, Vaccine) %>%
     summarise(
@@ -237,7 +273,11 @@ plot_ratio <- function(numerator_label,
     row.names = FALSE
   )
   
-  invisible(list(plot = p, data = ratio_data, summary = ratio_summary))
+  invisible(list(plot       = p_lin,
+                 plot_log10 = p_log,
+                 data       = ratio_data,
+                 data_log10 = ratio_data_log,
+                 summary    = ratio_summary))
 }
 
 

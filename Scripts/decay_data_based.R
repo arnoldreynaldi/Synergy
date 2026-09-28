@@ -1,18 +1,20 @@
 # =========================================================================
-# Libraries
-# =========================================================================
-library(dplyr)
-library(tidyr)
-library(ggplot2)
-
-# Assumes these globals exist in your environment:
-#   combined_data, subject_to_exclude, vaccine_levels, formulation_cols,
-#   figure_folder, table_folder
-
-# =========================================================================
 # Helpers
 # =========================================================================
 sanitize <- function(x) gsub("[^A-Za-z0-9_]", "_", x)
+
+# Shared plot theme: larger text, tighter legend
+big_text_theme <- theme_bw(base_size = 16) +
+  theme(
+    legend.position  = "none",
+    plot.title       = element_text(size = 17, face = "bold", margin = margin(b = 6)),
+    strip.text       = element_text(size = 15, face = "bold", lineheight = 1.1),
+    axis.title       = element_text(size = 15),
+    axis.text        = element_text(size = 13),
+    legend.title     = element_text(size = 14),
+    legend.text      = element_text(size = 13),
+    plot.margin      = margin(5, 5, 5, 5)
+  )
 
 halflife_from_slope <- function(slope) -log10(2) / slope
 
@@ -175,8 +177,8 @@ run_analysis <- function(data, cell_type, measurement_type) {
     ungroup()
   
   # ---- 3. AIC search: separately for early and late -----------------------
-  early_search <- slope_partition_search(early_data, "Early (first 2 timepoints)", vaccines)
-  late_search  <- slope_partition_search(late_data,  "Late  (last 2 timepoints)",  vaccines)
+  early_search <- slope_partition_search(early_data, "Early", vaccines)
+  late_search  <- slope_partition_search(late_data,  "Late",  vaccines)
   
   aic_decay <- rbind(
     if (!is.null(early_search)) early_search$table else NULL,
@@ -189,21 +191,17 @@ run_analysis <- function(data, cell_type, measurement_type) {
   per_vaccine_decay <- rbind(
     if (!is.null(early_search))
       halflife_with_ci(early_data, early_search$best$cl, vaccines,
-                       "Early (first 2 timepoints)",
-                       model_label = "Best AIC partition") else NULL,
+                       "Early", model_label = "Best AIC partition") else NULL,
     if (!is.null(late_search))
       halflife_with_ci(late_data, late_search$best$cl, vaccines,
-                       "Late  (last 2 timepoints)",
-                       model_label = "Best AIC partition") else NULL,
+                       "Late", model_label = "Best AIC partition") else NULL,
     
     if (!is.null(early_search))
       halflife_with_ci(early_data, all_diff_cl, vaccines,
-                       "Early (first 2 timepoints)",
-                       model_label = "All 4 different") else NULL,
+                       "Early", model_label = "All 4 different") else NULL,
     if (!is.null(late_search))
       halflife_with_ci(late_data, all_diff_cl, vaccines,
-                       "Late  (last 2 timepoints)",
-                       model_label = "All 4 different") else NULL
+                       "Late", model_label = "All 4 different") else NULL
   )
   
   # =========================================================================
@@ -229,7 +227,6 @@ run_analysis <- function(data, cell_type, measurement_type) {
   
   slope_lookup <- per_vaccine_decay %>%
     filter(Model == "Best AIC partition") %>%
-    mutate(Phase = ifelse(grepl("^Early", Phase), "Early", "Late")) %>%
     select(Vaccine, Phase, Slope)
   
   segments_df <- anchor_means %>%
@@ -242,18 +239,12 @@ run_analysis <- function(data, cell_type, measurement_type) {
       y1 = mean_log10[1],
       y2 = mean_log10[1] + Slope[1] * (Day[2] - Day[1]),
       .groups = "drop"
-    ) %>%
-    mutate(Phase = ifelse(Phase == "Early",
-                          "Early (first 2 timepoints)",
-                          "Late  (last 2 timepoints)"))
+    )
   
   raw_anchors <- subset_df %>%
     left_join(anchor_days, by = "Vaccine") %>%
     filter(Day %in% c(d1, d2, dn1, dn)) %>%
-    mutate(Phase = ifelse(Day %in% c(d1, d2), "Early", "Late")) %>%
-    mutate(Phase = ifelse(Phase == "Early",
-                          "Early (first 2 timepoints)",
-                          "Late  (last 2 timepoints)"))
+    mutate(Phase = ifelse(Day %in% c(d1, d2), "Early", "Late"))
   
   # =========================================================================
   # 5. Plots
@@ -263,54 +254,49 @@ run_analysis <- function(data, cell_type, measurement_type) {
     tidyr::pivot_longer(group_decay_two_point,
                         cols = c(early_slope, late_slope),
                         names_to = "Phase", values_to = "Slope") %>%
-      mutate(Phase = ifelse(Phase == "early_slope",
-                            "Early (first 2 timepoints)",
-                            "Late  (last 2 timepoints)")),
+      mutate(Phase = ifelse(Phase == "early_slope", "Early", "Late")),
     aes(x = Vaccine, y = Slope, color = Vaccine)) +
     geom_point(size = 3) +
     facet_wrap(~Phase) +
     scale_color_manual(values = formulation_cols, drop = FALSE) +
-    labs(title = "Group-level two-point decay slopes",
+    labs(title = "Group-level two-point\ndecay slopes",
          y = "Slope (log10 per day)", x = NULL) +
-    theme_bw() + theme(legend.position = "none")
+    big_text_theme
   
   plot_group_halflife <- ggplot(
     tidyr::pivot_longer(group_decay_two_point,
                         cols = c(early_halflife, late_halflife),
                         names_to = "Phase", values_to = "HalfLife") %>%
-      mutate(Phase = ifelse(Phase == "early_halflife",
-                            "Early (first 2 timepoints)",
-                            "Late  (last 2 timepoints)")),
+      mutate(Phase = ifelse(Phase == "early_halflife", "Early", "Late")),
     aes(x = Vaccine, y = HalfLife, color = Vaccine)) +
     geom_point(size = 3) +
     facet_wrap(~Phase) +
     scale_color_manual(values = formulation_cols, drop = FALSE) +
-    labs(title = "Group-level two-point half-life (days, log10 scale)",
+    labs(title = "Group-level two-point half-life\n(days, log10 scale)",
          y = "Half-life (days)", x = NULL) +
-    theme_bw() + theme(legend.position = "none")
+    big_text_theme
   
-  # ---- Half-life with CI; free_y so early and late get their own scale ----
+  # ---- Half-life with CI; free_y; NA upper CI shown as 300 ----------------
+  #      (only when the point estimate is positive — negative half-lives
+  #       are left uncapped, i.e. no upper whisker is drawn)
   make_hl_plot <- function(df, title, group_lookup = NULL) {
+    df <- df %>%
+      mutate(HalfLife_Upper_plot = ifelse(is.na(HalfLife_Upper) & HalfLife > 0,
+                                          300, HalfLife_Upper))
+    
     if (!is.null(group_lookup)) {
       df <- df %>%
         left_join(group_lookup, by = "Phase") %>%
-        mutate(Phase_label = paste0(Phase, "\nslope grouping: ", Groups))
-      p <- ggplot(df, aes(x = Vaccine, y = HalfLife, color = Vaccine)) +
-        geom_point(size = 3) +
-        geom_errorbar(aes(ymin = HalfLife_Lower, ymax = HalfLife_Upper),
-                      width = 0.2) +
-        facet_wrap(~Phase_label, scales = "free_y")
-    } else {
-      p <- ggplot(df, aes(x = Vaccine, y = HalfLife, color = Vaccine)) +
-        geom_point(size = 3) +
-        geom_errorbar(aes(ymin = HalfLife_Lower, ymax = HalfLife_Upper),
-                      width = 0.2) +
-        facet_wrap(~Phase, scales = "free_y")
+        mutate(Phase = paste0(Phase, "\n", Groups))
     }
-    p +
+    ggplot(df, aes(x = Vaccine, y = HalfLife, color = Vaccine)) +
+      geom_point(size = 3) +
+      geom_errorbar(aes(ymin = HalfLife_Lower, ymax = HalfLife_Upper_plot),
+                    width = 0.2) +
+      facet_wrap(~Phase, scales = "free_y") +
       scale_color_manual(values = formulation_cols, drop = FALSE) +
       labs(title = title, y = "Half-life (days)", x = NULL) +
-      theme_bw() + theme(legend.position = "none")
+      big_text_theme
   }
   
   best_group_lookup <- aic_decay %>%
@@ -319,13 +305,13 @@ run_analysis <- function(data, cell_type, measurement_type) {
   
   plot_halflife_ci_best <- make_hl_plot(
     per_vaccine_decay %>% filter(Model == "Best AIC partition"),
-    "Half-life (days) with 95% CI - from best-AIC model",
+    "Half-life (days) with 95% CI\nfrom best-AIC model",
     group_lookup = best_group_lookup
   )
   
   plot_halflife_ci_alldiff <- make_hl_plot(
     per_vaccine_decay %>% filter(Model == "All 4 different"),
-    "Half-life (days) with 95% CI - all 4 groups different"
+    "Half-life (days) with 95% CI\nall 4 groups different"
   )
   
   # ---- Anchor points (no jitter) + best-AIC slope segment -----------------
@@ -338,9 +324,9 @@ run_analysis <- function(data, cell_type, measurement_type) {
                  linewidth = 1.3) +
     facet_wrap(~Phase, scales = "free_x") +
     scale_color_manual(values = formulation_cols, drop = FALSE) +
-    labs(title = "Datapoints with best-AIC fitted slope",
+    labs(title = "Datapoints with\nbest-AIC fitted slope",
          y = "log10(Cell count)", x = "Day") +
-    theme_bw() + theme(legend.position = "none")
+    big_text_theme
   
   # =========================================================================
   # 6. Save outputs
@@ -353,15 +339,15 @@ run_analysis <- function(data, cell_type, measurement_type) {
   dir.create(table_base, recursive = TRUE, showWarnings = FALSE)
   
   ggsave(file.path(plot_base, "1_Group_slopes_two_point.png"),
-         plot_group_slopes,        width = 7, height = 4)
+         plot_group_slopes,        width = 5.5, height = 3.2, dpi = 300)
   ggsave(file.path(plot_base, "2_Group_halflife_two_point.png"),
-         plot_group_halflife,      width = 7, height = 4)
+         plot_group_halflife,      width = 5.5, height = 3.2, dpi = 300)
   ggsave(file.path(plot_base, "3_Halflife_with_CI_bestAIC.png"),
-         plot_halflife_ci_best,    width = 8, height = 4)
+         plot_halflife_ci_best,    width = 6,   height = 3.2, dpi = 300)
   ggsave(file.path(plot_base, "4_Halflife_with_CI_all4diff.png"),
-         plot_halflife_ci_alldiff, width = 7, height = 4)
+         plot_halflife_ci_alldiff, width = 5.5, height = 3.2, dpi = 300)
   ggsave(file.path(plot_base, "5_AnchorPoints_bestAICslope.png"),
-         plot_anchor_segments,     width = 8, height = 4)
+         plot_anchor_segments,     width = 6,   height = 3.2, dpi = 300)
   
   write.csv(group_decay_two_point,
             file.path(table_base, "group_decay_two_point.csv"), row.names = FALSE)

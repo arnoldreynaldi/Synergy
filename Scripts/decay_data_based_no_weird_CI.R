@@ -1,13 +1,4 @@
-# =========================================================================
-# Libraries
-# =========================================================================
-library(dplyr)
-library(tidyr)
-library(ggplot2)
 
-# Assumes these globals exist in your environment:
-#   combined_data, subject_to_exclude, vaccine_levels, formulation_cols,
-#   figure_folder, table_folder
 
 # =========================================================================
 # Helpers
