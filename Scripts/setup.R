@@ -5,6 +5,7 @@ library(tidyr)
 library(purrr)
 library(glue)
 library(ggplot2)
+library(emmeans)
 
 file_path <- "C:/Projects/Synergy"
 

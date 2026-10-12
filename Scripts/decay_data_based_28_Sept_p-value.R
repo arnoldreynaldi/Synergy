@@ -1,12 +1,4 @@
 # =========================================================================
-# Libraries
-# =========================================================================
-library(dplyr)
-library(tidyr)
-library(ggplot2)
-library(emmeans)
-subject_to_exclude <- c(subject_to_exclude, "11171", "10236")
-# =========================================================================
 # Helpers
 # =========================================================================
 sanitize <- function(x) gsub("[^A-Za-z0-9_]", "_", x)
@@ -40,7 +32,6 @@ group_two_point_slope <- function(dat, phase = c("early", "late")) {
 emm_clean <- function(emm) {
   d  <- as.data.frame(emm, stringsAsFactors = FALSE)
   nm <- names(d)
-  
   nm <- sub("^asymp\\.LCL$", "lower.CL", nm, ignore.case = TRUE)
   nm <- sub("^asymp\\.UCL$", "upper.CL", nm, ignore.case = TRUE)
   nm <- sub("^LCL$",         "lower.CL", nm, ignore.case = TRUE)
@@ -51,7 +42,6 @@ emm_clean <- function(emm) {
   nm <- sub("^std_error$",   "SE",       nm, ignore.case = TRUE)
   nm <- sub("^p_value$",     "p.value",  nm, ignore.case = TRUE)
   nm <- sub("^pvalue$",      "p.value",  nm, ignore.case = TRUE)
-  
   names(d) <- nm
   d
 }
@@ -60,52 +50,32 @@ emm_clean <- function(emm) {
 # Per-phase emmeans
 # =========================================================================
 emm_one_phase <- function(dat, phase_label) {
-  if (is.null(dat) || nrow(dat) < 4) {
-    message("  [", phase_label, "] skipped: < 4 rows")
-    return(NULL)
-  }
+  if (is.null(dat) || nrow(dat) < 4) return(NULL)
   dat$Vaccine <- droplevels(factor(dat$Vaccine))
-  if (nlevels(dat$Vaccine) < 2) {
-    message("  [", phase_label, "] skipped: < 2 vaccine levels")
-    return(NULL)
-  }
+  if (nlevels(dat$Vaccine) < 2) return(NULL)
   n_per_vax <- table(dat$Vaccine)
-  if (any(n_per_vax < 2)) {
-    message("  [", phase_label, "] skipped: some vaccine < 2 obs")
-    return(NULL)
-  }
+  if (any(n_per_vax < 2)) return(NULL)
+  
   fit <- tryCatch(lm(log10_Value ~ Vaccine * Day, data = dat),
                   error = function(e) NULL)
-  if (is.null(fit)) {
-    message("  [", phase_label, "] skipped: lm failed")
-    return(NULL)
-  }
-  if (isTRUE(summary(fit)$sigma == 0)) {
-    message("  [", phase_label, "] skipped: zero residual variance")
-    return(NULL)
-  }
-  if (any(is.na(coef(fit)))) {
-    message("  [", phase_label, "] skipped: NA coefficients")
-    return(NULL)
-  }
+  if (is.null(fit)) return(NULL)
+  if (!is.finite(summary(fit)$sigma) || summary(fit)$sigma < 1e-10) return(NULL)
+  if (any(is.na(coef(fit)))) return(NULL)
   
   emm_slopes <- tryCatch(
     emtrends(fit, ~ Vaccine, var = "Day"),
     error = function(e) NULL
   )
-  if (is.null(emm_slopes)) {
-    message("  [", phase_label, "] skipped: emtrends failed")
-    return(NULL)
-  }
+  if (is.null(emm_slopes)) return(NULL)
   
   slope_raw <- emm_clean(emm_slopes)
   needed    <- c("Vaccine", "Day.trend", "SE", "lower.CL", "upper.CL")
-  if (!all(needed %in% names(slope_raw))) {
-    message("  [", phase_label, "] skipped: emtrends columns ",
-            paste(names(slope_raw), collapse = ", "))
-    return(NULL)
-  }
+  if (!all(needed %in% names(slope_raw))) return(NULL)
   
+  # Half-life + CI.
+  #   halflife_from_slope() is INCREASING in slope, so for a slope CI entirely
+  #   on one side of 0:  HL_lower = f(Slope_lower),  HL_upper = f(Slope_upper).
+  #   If the slope CI straddles 0 -> half-life CI is not an interval; suppress it.
   slope_df <- slope_raw %>%
     mutate(
       Slope          = Day.trend,
@@ -113,23 +83,20 @@ emm_one_phase <- function(dat, phase_label) {
       Slope_Lower    = lower.CL,
       Slope_Upper    = upper.CL,
       Phase          = phase_label,
-      HalfLife       = halflife_from_slope(Slope),
-      HalfLife_Lower = ifelse(Slope_Lower < 0,
-                              halflife_from_slope(Slope_Lower), NA_real_),
-      HalfLife_Upper = ifelse(Slope_Upper < 0,
-                              halflife_from_slope(Slope_Upper), NA_real_)
+      HalfLife       = ifelse(abs(Slope) < 1e-10, NA_real_,
+                              halflife_from_slope(Slope)),
+      .ci_ok         = Slope_Lower < 0 & Slope_Upper < 0 |
+        Slope_Lower >= 0 & Slope_Upper >= 0,
+      .ci_ok         = .ci_ok & (Slope_Lower < 0 | Slope_Upper < 0),
+      HalfLife_Lower = ifelse(.ci_ok, halflife_from_slope(Slope_Lower), NA_real_),
+      HalfLife_Upper = ifelse(.ci_ok, halflife_from_slope(Slope_Upper), NA_real_)
     ) %>%
     select(Vaccine, Phase, Slope, Slope_SE, Slope_Lower, Slope_Upper,
            HalfLife, HalfLife_Lower, HalfLife_Upper)
   
-  # ---- pairwise p-values: defensive column lookup ----
-  pairs_obj <- tryCatch(
-    pairs(emm_slopes, adjust = "tukey"),
-    error = function(e) {
-      message("  [", phase_label, "] pairs() failed: ", conditionMessage(e))
-      NULL
-    }
-  )
+  # ---- pairwise p-values ----
+  pairs_obj <- tryCatch(pairs(emm_slopes, adjust = "tukey"),
+                        error = function(e) NULL)
   if (is.null(pairs_obj)) {
     return(list(slopes = slope_df, pairs = NULL, model = fit))
   }
@@ -137,30 +104,17 @@ emm_one_phase <- function(dat, phase_label) {
   pairs_df <- tryCatch({
     t <- emm_clean(as.data.frame(pairs_obj, stringsAsFactors = FALSE))
     ccol <- intersect(c("contrast", "term"), names(t))
-    if (length(ccol) == 0) stop("no contrast/term column; have: ",
-                                paste(names(t), collapse = ", "))
+    if (length(ccol) == 0) stop("no contrast/term column")
     ccol <- ccol[1]
-    se_col <- intersect(c("SE", "std.error"), names(t))
-    se_col <- if (length(se_col)) se_col[1] else NA_character_
-    p_col  <- intersect(c("p.value", "p_value"), names(t))
-    p_col  <- if (length(p_col)) p_col[1] else NA_character_
-    has_lc <- "lower.CL" %in% names(t)
-    has_uc <- "upper.CL" %in% names(t)
-    n <- nrow(t)
+    p_col <- intersect(c("p.value", "p_value"), names(t))
+    p_col <- if (length(p_col)) p_col[1] else NA_character_
     data.frame(
-      Phase      = rep(phase_label, n),
-      Contrast   = t[[ccol]],
-      Diff_Slope = t$estimate,
-      Diff_SE    = if (!is.na(se_col)) t[[se_col]] else rep(NA_real_, n),
-      Diff_Lower = if (has_lc) t$lower.CL else rep(NA_real_, n),
-      Diff_Upper = if (has_uc) t$upper.CL else rep(NA_real_, n),
-      p_value    = if (!is.na(p_col)) t[[p_col]] else rep(NA_real_, n),
+      Phase    = phase_label,
+      Contrast = t[[ccol]],
+      p_value  = if (!is.na(p_col)) t[[p_col]] else NA_real_,
       stringsAsFactors = FALSE
     )
-  }, error = function(e) {
-    message("  [", phase_label, "] pairs extraction failed: ", conditionMessage(e))
-    NULL
-  })
+  }, error = function(e) NULL)
   
   if (is.null(pairs_df) || nrow(pairs_df) == 0) {
     return(list(slopes = slope_df, pairs = NULL, model = fit))
@@ -170,66 +124,71 @@ emm_one_phase <- function(dat, phase_label) {
 }
 
 # =========================================================================
-# Half-life plot with pairwise p-value brackets
-# (significant p-values, p < 0.05, are printed in BOLD)
+# Half-life plot with pairwise p-value brackets.
+# p < 0.05 -> bold red label.  Vaccine colour scheme preserved on points/CI.
 # =========================================================================
 make_halflife_pvalue_plot <- function(per_vaccine_hl, emm_pairs) {
   
   vaccine_order <- levels(per_vaccine_hl$Vaccine)
-  if (is.null(vaccine_order)) vaccine_order <- sort(unique(per_vaccine_hl$Vaccine))
+  if (is.null(vaccine_order))
+    vaccine_order <- sort(unique(per_vaccine_hl$Vaccine))
   vx <- setNames(seq_along(vaccine_order), vaccine_order)
   
   per_vaccine_hl <- per_vaccine_hl %>%
     mutate(Phase   = as.character(Phase),
-           Vaccine = factor(Vaccine, levels = vaccine_order))
+           Vaccine = factor(Vaccine, levels = vaccine_order)) %>%
+    filter(is.finite(HalfLife))
   
   phase_top <- per_vaccine_hl %>%
     group_by(Phase) %>%
-    summarise(data_top = max(HalfLife_Upper_plot, na.rm = TRUE),
-              .groups = "drop")
+    summarise(
+      data_top = suppressWarnings(max(c(HalfLife, HalfLife_Upper), na.rm = TRUE)),
+      data_bot = suppressWarnings(min(c(HalfLife, HalfLife_Lower), na.rm = TRUE)),
+      .groups = "drop"
+    ) %>%
+    mutate(pad = pmax((data_top - data_bot) * 0.1, 1e-6))
   
   if (!is.null(emm_pairs) && nrow(emm_pairs) > 0) {
     br <- emm_pairs %>%
       mutate(Phase = as.character(Phase)) %>%
-      separate(Contrast, into = c("g1", "g2"), sep = "\\s*-\\s*", remove = FALSE) %>%
+      separate(Contrast, into = c("g1", "g2"),
+               sep = "\\s*-\\s*", remove = FALSE) %>%
       mutate(g1 = trimws(g1), g2 = trimws(g2),
              x1 = vx[g1], x2 = vx[g2],
              xmin = pmin(x1, x2), xmax = pmax(x1, x2),
-             p_label = sprintf("%.3f", p_value),
-             p_bold  = ifelse(p_value < 0.05, "bold", "plain")) %>%
+             p_label = ifelse(is.na(p_value), "", sprintf("%.3f", p_value))) %>%
       filter(!is.na(xmin), !is.na(xmax)) %>%
       left_join(phase_top, by = "Phase") %>%
       group_by(Phase) %>%
       arrange(xmin, xmax, .by_group = TRUE) %>%
       mutate(bracket_i = row_number(),
-             y = data_top * (1 + 0.13 * bracket_i)) %>%
+             y = data_top + pad * (1 + bracket_i)) %>%
       ungroup()
   } else {
     br <- NULL
   }
   
-  if (!is.null(br) && nrow(br) > 0) {
-    ytops <- br %>%
-      group_by(Phase) %>%
-      summarise(ytop = max(y) * 1.12, .groups = "drop")
-  } else {
-    ytops <- phase_top %>% mutate(ytop = data_top * 1.15)
-  }
+  br_sig <- if (!is.null(br) && nrow(br) > 0) {
+    br %>% filter(!is.na(p_value), p_value < 0.05)
+  } else NULL
   
-  dummy <- data.frame(
-    Phase   = ytops$Phase,
-    Vaccine = factor(vaccine_order[1], levels = vaccine_order),
-    y       = ytops$ytop
-  )
+  headroom <- phase_top %>%
+    mutate(y = data_top + pad * (if (is.null(br) || nrow(br) == 0) 1.5
+                                 else max(br$bracket_i[br$Phase == Phase]) + 2)) %>%
+    transmute(Phase,
+              Vaccine = factor(vaccine_order[1], levels = vaccine_order),
+              y)
   
   p <- ggplot() +
-    geom_blank(data = dummy, aes(x = Vaccine, y = y)) +
+    geom_blank(data = headroom, aes(x = Vaccine, y = y)) +
+    geom_hline(yintercept = 0, linetype = "dashed",
+               color = "grey60", linewidth = 0.3) +
     geom_point(data = per_vaccine_hl,
                aes(x = Vaccine, y = HalfLife, color = Vaccine), size = 3) +
     geom_errorbar(data = per_vaccine_hl,
                   aes(x = Vaccine, ymin = HalfLife_Lower,
-                      ymax = HalfLife_Upper_plot, color = Vaccine),
-                  width = 0.2) +
+                      ymax = HalfLife_Upper, color = Vaccine),
+                  width = 0.2, na.rm = TRUE) +
     facet_wrap(~ Phase, scales = "free_y") +
     scale_color_manual(values = formulation_cols, drop = FALSE) +
     labs(title = "Half-life (days) with 95% CI\nand adjusted pairwise p-values",
@@ -241,10 +200,16 @@ make_halflife_pvalue_plot <- function(per_vaccine_hl, emm_pairs) {
       geom_segment(data = br,
                    aes(x = xmin, xend = xmax, y = y, yend = y),
                    inherit.aes = FALSE, color = "grey30", linewidth = 0.4) +
+      # Base layer: all p-labels in plain black
       geom_text(data = br,
-                aes(x = (xmin + xmax) / 2, y = y, label = p_label,
-                    fontface = p_bold),
-                inherit.aes = FALSE, vjust = -0.3, size = 3.2)
+                aes(x = (xmin + xmax) / 2, y = y, label = p_label),
+                inherit.aes = FALSE, vjust = -0.3, size = 3.2,
+                color = "black", fontface = "plain") +
+      # Overlay: significant p-labels in bold red on top
+      geom_text(data = br_sig,
+                aes(x = (xmin + xmax) / 2, y = y, label = p_label),
+                inherit.aes = FALSE, vjust = -0.3, size = 3.2,
+                color = "red", fontface = "bold")
   }
   
   p
@@ -255,25 +220,20 @@ make_halflife_pvalue_plot <- function(per_vaccine_hl, emm_pairs) {
 # =========================================================================
 run_analysis <- function(data, cell_type, measurement_type) {
   
-  message(">>> ", cell_type, " / ", measurement_type)
-  
   subset_df <- data %>%
     filter(Cell_Type == cell_type,
            Measurement_type == measurement_type,
            Unit == "number") %>%
-    mutate(log10_Value = log10(Value))
+    mutate(log10_Value = log10(Value)) %>%
+    filter(is.finite(log10_Value)) %>%
+    filter(!Mouse_number %in% subject_to_exclude)
   
-  subset_df <- subset_df %>% filter(is.finite(log10_Value))
-  subset_df <- subset_df %>% filter(!Mouse_number %in% subject_to_exclude)
-  
-  n_per_vaccine <- subset_df %>% group_by(Vaccine) %>% summarise(n = n())
-  if (any(n_per_vaccine$n < 1)) return(NULL)
+  if (nrow(subset_df) == 0) return(NULL)
   
   subset_df$Vaccine <- factor(subset_df$Vaccine, levels = vaccine_levels)
   vaccines <- levels(droplevels(subset_df$Vaccine))
   if (length(vaccines) < 2) return(NULL)
   
-  # ---- 1. Group-level two-point decay rates -------------------------------
   group_decay_two_point <- subset_df %>%
     group_by(Vaccine) %>%
     group_modify(~data.frame(
@@ -286,7 +246,6 @@ run_analysis <- function(data, cell_type, measurement_type) {
       late_halflife  = halflife_from_slope(late_slope)
     )
   
-  # ---- 2. Per-vaccine first-2 / last-2 days -------------------------------
   early_data <- subset_df %>%
     group_by(Vaccine) %>%
     filter(Day %in% sort(unique(Day))[1:2]) %>%
@@ -298,7 +257,6 @@ run_analysis <- function(data, cell_type, measurement_type) {
       (length(unique(Day)) - 1):length(unique(Day))]) %>%
     ungroup()
   
-  # ---- 3. emmeans per phase ----------------------------------------------
   early_emm <- emm_one_phase(early_data, "Early")
   late_emm  <- emm_one_phase(late_data,  "Late")
   
@@ -316,7 +274,6 @@ run_analysis <- function(data, cell_type, measurement_type) {
   
   if (nrow(per_vaccine_decay) == 0) return(NULL)
   
-  # ---- 4. Anchor segments -------------------------------------------------
   anchor_days <- subset_df %>%
     group_by(Vaccine) %>%
     summarise(
@@ -354,7 +311,6 @@ run_analysis <- function(data, cell_type, measurement_type) {
     filter(Day %in% c(d1, d2, dn1, dn)) %>%
     mutate(Phase = ifelse(Day %in% c(d1, d2), "Early", "Late"))
   
-  # ---- 5. Plots -----------------------------------------------------------
   plot_group_slopes <- ggplot(
     tidyr::pivot_longer(group_decay_two_point,
                         cols = c(early_slope, late_slope),
@@ -381,11 +337,7 @@ run_analysis <- function(data, cell_type, measurement_type) {
          y = "Half-life (days)", x = NULL) +
     big_text_theme
   
-  per_vaccine_hl <- per_vaccine_decay %>%
-    mutate(HalfLife_Upper_plot = ifelse(is.na(HalfLife_Upper) & HalfLife > 0,
-                                        300, HalfLife_Upper))
-  
-  plot_halflife_pvalue <- make_halflife_pvalue_plot(per_vaccine_hl, emm_pairs)
+  plot_halflife_pvalue <- make_halflife_pvalue_plot(per_vaccine_decay, emm_pairs)
   
   plot_anchor_segments <- ggplot() +
     geom_point(data = raw_anchors,
@@ -400,7 +352,6 @@ run_analysis <- function(data, cell_type, measurement_type) {
          y = "log10(Cell count)", x = "Day") +
     big_text_theme
   
-  # ---- 6. Save ------------------------------------------------------------
   plot_base  <- file.path(figure_folder, paste0(cell_type, "_analysis"),
                           sanitize(measurement_type))
   table_base <- file.path(table_folder,  paste0(cell_type, "_analysis"),
@@ -429,11 +380,11 @@ run_analysis <- function(data, cell_type, measurement_type) {
               row.names = FALSE)
   }
   
-  return(list(
+  list(
     group_decay_two_point = group_decay_two_point,
     per_vaccine_decay     = per_vaccine_decay,
     emm_pairs             = emm_pairs
-  ))
+  )
 }
 
 # =========================================================================
@@ -445,15 +396,12 @@ combos <- combined_data %>%
   arrange(Cell_Type, Measurement_type)
 
 results_list <- list()
-for (i in 1:nrow(combos)) {
+for (i in seq_len(nrow(combos))) {
   ct <- combos$Cell_Type[i]
   mt <- combos$Measurement_type[i]
   res <- tryCatch(
     run_analysis(combined_data, ct, mt),
-    error = function(e) {
-      message("Skipped: ", ct, " / ", mt, " -- ", conditionMessage(e))
-      NULL
-    }
+    error = function(e) NULL
   )
   if (!is.null(res)) {
     results_list[[paste(ct, mt, sep = " | ")]] <- res
