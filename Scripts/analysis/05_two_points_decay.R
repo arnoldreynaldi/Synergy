@@ -72,27 +72,49 @@ emm_one_phase <- function(dat, phase_label) {
   needed    <- c("Vaccine", "Day.trend", "SE", "lower.CL", "upper.CL")
   if (!all(needed %in% names(slope_raw))) return(NULL)
   
-  # Half-life + CI.
-  #   halflife_from_slope() is INCREASING in slope, so for a slope CI entirely
-  #   on one side of 0:  HL_lower = f(Slope_lower),  HL_upper = f(Slope_upper).
-  #   If the slope CI straddles 0 -> half-life CI is not an interval; suppress it.
+  # ---- Half-life + CI -----------------------------------------------------
+  #   h(s) = -log10(2)/s.  Pole at s = 0.  Three cases:
+  #     A) slope CI entirely on one side of 0 -> bounded interval.
+  #     B) slope CI straddles 0, point slope < 0 (positive half-life):
+  #          bounded segment [h(s_L), h(point)], arrow UP into +Inf.
+  #     C) slope CI straddles 0, point slope > 0 (negative half-life):
+  #          bounded segment [h(point), h(s_L)] (spans across zero),
+  #          arrow DOWN from point estimate into -Inf.
+  #   Case C uses h(s_L) as the UPPER CI (the positive-branch endpoint),
+  #   per spec, rather than h(s_U) (the negative-branch endpoint).
   slope_df <- slope_raw %>%
     mutate(
-      Slope          = Day.trend,
-      Slope_SE       = SE,
-      Slope_Lower    = lower.CL,
-      Slope_Upper    = upper.CL,
-      Phase          = phase_label,
-      HalfLife       = ifelse(abs(Slope) < 1e-10, NA_real_,
-                              halflife_from_slope(Slope)),
-      .ci_ok         = Slope_Lower < 0 & Slope_Upper < 0 |
-        Slope_Lower >= 0 & Slope_Upper >= 0,
-      .ci_ok         = .ci_ok & (Slope_Lower < 0 | Slope_Upper < 0),
-      HalfLife_Lower = ifelse(.ci_ok, halflife_from_slope(Slope_Lower), NA_real_),
-      HalfLife_Upper = ifelse(.ci_ok, halflife_from_slope(Slope_Upper), NA_real_)
+      Slope       = Day.trend,
+      Slope_SE    = SE,
+      Slope_Lower = lower.CL,
+      Slope_Upper = upper.CL,
+      Phase       = phase_label,
+      
+      HalfLife     = halflife_from_slope(Slope),
+      .hl_at_lower = halflife_from_slope(Slope_Lower),
+      .hl_at_upper = halflife_from_slope(Slope_Upper),
+      
+      .straddles = Slope_Lower < 0 & Slope_Upper > 0,
+      
+      HalfLife_Lower = case_when(
+        !.straddles ~ pmin(.hl_at_lower, .hl_at_upper),
+        Slope < 0   ~ .hl_at_lower,   # truncated-above: finite bound at bottom
+        Slope > 0   ~ HalfLife        # truncated-below: point estimate at bottom
+      ),
+      HalfLife_Upper = case_when(
+        !.straddles ~ pmax(.hl_at_lower, .hl_at_upper),
+        Slope < 0   ~ HalfLife,       # truncated-above: point estimate at top
+        Slope > 0   ~ .hl_at_lower    # truncated-below: finite bound at top (positive)
+      ),
+      
+      ci_type = case_when(
+        !.straddles ~ "two-sided",
+        Slope < 0   ~ "truncated-above",
+        Slope > 0   ~ "truncated-below"
+      )
     ) %>%
     select(Vaccine, Phase, Slope, Slope_SE, Slope_Lower, Slope_Upper,
-           HalfLife, HalfLife_Lower, HalfLife_Upper)
+           HalfLife, HalfLife_Lower, HalfLife_Upper, ci_type)
   
   # ---- pairwise p-values ----
   pairs_obj <- tryCatch(pairs(emm_slopes, adjust = "tukey"),
@@ -125,7 +147,10 @@ emm_one_phase <- function(dat, phase_label) {
 
 # =========================================================================
 # Half-life plot with pairwise p-value brackets.
-# p < 0.05 -> bold red label.  Vaccine colour scheme preserved on points/CI.
+#   - two-sided CIs        -> standard capped errorbar
+#   - truncated-above CI   -> bar point -> h(s_L), cap, arrow UP
+#   - truncated-below CI   -> bar point -> h(s_L), cap, arrow DOWN
+#   p < 0.05 -> bold red label
 # =========================================================================
 make_halflife_pvalue_plot <- function(per_vaccine_hl, emm_pairs) {
   
@@ -179,16 +204,61 @@ make_halflife_pvalue_plot <- function(per_vaccine_hl, emm_pairs) {
               Vaccine = factor(vaccine_order[1], levels = vaccine_order),
               y)
   
+  # ---- split by CI kind ----
+  hl_two_sided <- per_vaccine_hl %>% filter(ci_type == "two-sided")
+  
+  phase_range <- per_vaccine_hl %>%
+    group_by(Phase) %>%
+    summarise(rng = diff(range(c(HalfLife, HalfLife_Lower, HalfLife_Upper),
+                               na.rm = TRUE)),
+              .groups = "drop")
+  
+  cap_halfwidth <- 0.1   # matches geom_errorbar(width = 0.2)
+  
+  hl_truncated <- per_vaccine_hl %>%
+    filter(ci_type %in% c("truncated-above", "truncated-below")) %>%
+    left_join(phase_range, by = "Phase") %>%
+    mutate(
+      # Finite end of the CI (the capped end).
+      finite_end = ifelse(ci_type == "truncated-above",
+                          HalfLife_Lower, HalfLife_Upper),
+      # Arrow goes AWAY from the point estimate into the unbounded side.
+      #   truncated-above -> unbounded above -> arrow up
+      #   truncated-below -> unbounded below -> arrow down
+      arrow_len = pmax(rng * 0.08, 1e-6),
+      arrow_end = ifelse(ci_type == "truncated-above",
+                         HalfLife + arrow_len,
+                         HalfLife - arrow_len),
+      x_num     = as.numeric(Vaccine)
+    )
+  
   p <- ggplot() +
     geom_blank(data = headroom, aes(x = Vaccine, y = y)) +
     geom_hline(yintercept = 0, linetype = "dashed",
                color = "grey60", linewidth = 0.3) +
     geom_point(data = per_vaccine_hl,
                aes(x = Vaccine, y = HalfLife, color = Vaccine), size = 3) +
-    geom_errorbar(data = per_vaccine_hl,
+    # Two-sided CIs: standard errorbar
+    geom_errorbar(data = hl_two_sided,
                   aes(x = Vaccine, ymin = HalfLife_Lower,
                       ymax = HalfLife_Upper, color = Vaccine),
                   width = 0.2, na.rm = TRUE) +
+    # Truncated CIs: bar from point estimate to the finite bound.
+    geom_segment(data = hl_truncated,
+                 aes(x = x_num, xend = x_num,
+                     y = HalfLife, yend = finite_end, color = Vaccine),
+                 linewidth = 0.5, na.rm = TRUE) +
+    # ...cap at the FINITE bound (like a real errorbar end).
+    geom_segment(data = hl_truncated,
+                 aes(x = x_num - cap_halfwidth, xend = x_num + cap_halfwidth,
+                     y = finite_end, yend = finite_end, color = Vaccine),
+                 linewidth = 0.5, na.rm = TRUE) +
+    # ...plus an open arrow from the point estimate into the unbounded side.
+    geom_segment(data = hl_truncated,
+                 aes(x = x_num, xend = x_num,
+                     y = HalfLife, yend = arrow_end, color = Vaccine),
+                 arrow = arrow(type = "open", length = unit(0.08, "in")),
+                 linewidth = 0.5, na.rm = TRUE) +
     facet_wrap(~ Phase, scales = "free_y") +
     scale_color_manual(values = formulation_cols, drop = FALSE) +
     labs(title = "Half-life (days) with 95% CI\nand adjusted pairwise p-values",
@@ -200,12 +270,10 @@ make_halflife_pvalue_plot <- function(per_vaccine_hl, emm_pairs) {
       geom_segment(data = br,
                    aes(x = xmin, xend = xmax, y = y, yend = y),
                    inherit.aes = FALSE, color = "grey30", linewidth = 0.4) +
-      # Base layer: all p-labels in plain black
       geom_text(data = br,
                 aes(x = (xmin + xmax) / 2, y = y, label = p_label),
                 inherit.aes = FALSE, vjust = -0.3, size = 3.2,
                 color = "black", fontface = "plain") +
-      # Overlay: significant p-labels in bold red on top
       geom_text(data = br_sig,
                 aes(x = (xmin + xmax) / 2, y = y, label = p_label),
                 inherit.aes = FALSE, vjust = -0.3, size = 3.2,
